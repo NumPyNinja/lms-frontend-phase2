@@ -14,7 +14,7 @@ export class ProgramService {
 
   getPrograms(): Observable<Program[]> {
     // return this.httpClient.get<Program[]>('assets/Programs.json')
-    return this.httpClient.get<Program[]>(this.url + "/allPrograms");
+    return this.httpClient.get<Program[]>("https://lms-admin-rest-service.herokuapp.com/allPrograms");
   }
 
   addProgram(program: Program): Observable<Program> {
