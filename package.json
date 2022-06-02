@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node sever.js",
-    "heroku-postbuild": "ng build --proxy-config proxy.config.json",
+    "start": "node sever.js --proxy-config proxy.config.json",
+    "heroku-postbuild": "ng build ",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
