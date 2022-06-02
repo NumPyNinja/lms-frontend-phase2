@@ -1,23 +1,18 @@
-// //Install express server
-// const express = require('express');
-// const path = require('path');
-
-// const app = express();
-
-// // Serve only the static files form the dist directory
-// app.use(express.static('./dist/lms-frontend-phase2'));
-
-// app.get('/*', (req, res) =>
-//     res.sendFile('index.html', {root: 'dist/lms-frontend-phase2/'}),
-// );
-
-// // Start the app by listening on the default Heroku port
-
 
 // Install express server 
 const express = require('express');
 const path = require('path');
 const app = express();
+
+var cors = require('cors');
+app.use(cors());
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'DELETE, PUT');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/lms-frontend-phase2'));
 app.get('/*', function(req, res) {
