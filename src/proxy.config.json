@@ -1,0 +1,9 @@
+{
+  "/api": {
+    "target":"https://lms-admin-rest-service.herokuapp.com/",
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "changeOrigin": true
+  }
+}

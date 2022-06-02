@@ -1,0 +1,26 @@
+<div class="signin-content">
+    <mat-card>
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <p>Please login to LMS application</p>
+           <mat-error id="errormessage" *ngIf="showErrorMessage">
+            Invalid username and password Please try again
+          </mat-error>
+          <mat-form-field class="full-width-input">
+            <input id="username" matInput placeholder="User" formControlName="userName" required>
+            <mat-error *ngIf="isFieldInvalid('userName')">
+              Please enter your user name
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width-input">
+            <input id="password" matInput type="password" placeholder="Password" formControlName="password" required>
+            <mat-error *ngIf="isFieldInvalid('userName')">
+              Please enter your password
+            </mat-error>
+          </mat-form-field>
+          <button id="login" mat-raised-button color="primary" type="submit">Login</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

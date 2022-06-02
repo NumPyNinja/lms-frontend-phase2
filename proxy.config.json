@@ -1,0 +1,11 @@
+{
+  "/api": {
+    "target":"https://lms-phase2.herokuapp.com/lms/",
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "secure": false
+  }
+}

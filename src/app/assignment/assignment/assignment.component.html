@@ -1,0 +1,87 @@
+<p-toast></p-toast>
+<div class="signin-content">
+    <mat-card>
+        <mat-card-title>
+            <div class="box" >
+                Manage Assignment<br>
+              </div><br>
+            <div class="box">
+                <div>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-danger" [disabled]="!selectedAssignments || !selectedAssignments.length"></button>
+                </div>
+                <div>
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                            placeholder="Search..." />
+                    </span>
+                </div>
+                <div>
+                    <button pButton pRipple id="new" label="A New Assignment" icon="pi pi-plus"
+                        class="p-button-rounded p-button-success"></button>
+                </div>
+            </div>
+        </mat-card-title>
+        <mat-card-content>
+            <div fxLayout="row" fxLayoutAlign="space-around center" style="height:100%">
+                <mat-spinner [diameter]="50" strokeWidth="5" *ngIf="visibility ">
+                </mat-spinner>
+            </div>
+            <p-table #dt responsiveLayout="stack" [value]="assignments" [rows]="5" [paginator]="true"
+                [globalFilterFields]="['assignmentName','assignmentDescription','assignmentComments']"
+                [(selection)]="selectedAssignments" [rowHover]="true" dataKey="assignmentId"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [showCurrentPageReport]="true">
+
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3%">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th style="width: 20%" pSortableColumn="assignmentName">Assignment Name <p-sortIcon field="assignmentName"></p-sortIcon>
+                        </th>
+                        <th style="width: 22%" pSortableColumn="assignmentDescription">Assignment Description <p-sortIcon field="description">
+                            </p-sortIcon>
+                        </th>
+                        <th style="width: 20%" pSortableColumn="assignmentComments">Assignment Due Date <p-sortIcon field="Comments"></p-sortIcon>
+                        </th>
+                        <th  pSortableColumn="assignmentGraderId">Assignment Grade <p-sortIcon field="Comments"></p-sortIcon>
+                        </th>
+                        <th  style="width: 15%" > Edit / Delete
+                        </th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-assignment>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="assignment"></p-tableCheckbox>
+                        </td>
+                        <td>{{assignment.assignmentName}}</td>
+                        <td>{{assignment.assignmentDescription}}</td>
+                        <td>{{assignment.assignmentDueDate}}</td>
+                        <td> <button pButton pRipple type="button" label="Manage" class="p-button-raised p-button-text p-button-plain"></button></td>
+                        <td>
+                            <div class="action">
+                                <span>
+                                    <button pButton pRipple icon="pi pi-pencil"
+                                        class="p-button-rounded p-button-success"
+                                        (click)="editAssignment(assignment)"></button>
+                                </span>&nbsp;&nbsp;
+                                <span>
+                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                                        (click)="deleteAssignment(assignment)"></button>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        In total there are {{assignments ? assignments.length : 0 }} assignments.
+                    </div>
+                </ng-template>
+            </p-table>
+        </mat-card-content>
+    </mat-card>
+</div>
