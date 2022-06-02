@@ -9,7 +9,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 
 const HOST = "localhost";
-const API_SERVICE_URL = "https://jsonplaceholder.typicode.com";
+const API_SERVICE_URL = "https://lms-phase2.herokuapp.com/lms/";
 
 // Proxy endpoints
 app.use('/api', createProxyMiddleware({
