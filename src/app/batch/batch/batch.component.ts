@@ -133,7 +133,7 @@ this.programService.getPrograms().subscribe(list=>{
         this.batchList = this.batchList.filter((val) => val.batchId!== batch.batchId);
         
         this.batchService.deleteBatch(batch).subscribe(response => {
-          console.log('a program is deleted');
+          console.log('a batch is deleted');
         })
         this.messageService.add({
           severity: 'success',
@@ -156,6 +156,11 @@ this.programService.getPrograms().subscribe(list=>{
     this.submitted = true;
 
     if (this.batch.batchName.trim()) {
+
+       const pro  = this.batch.programId;
+       this.batch.programId=pro.programId;
+      // this.batch.programName = pro.programName;
+      //edit batch
       if (this.batch.batchId) {
         this.batchList[this.findIndexById(this.batch.batchId )] = this.batch;
 
@@ -167,13 +172,13 @@ this.programService.getPrograms().subscribe(list=>{
         });
 
         this.batchService.updateBatch(this.batch).subscribe((res) => {
-          console.log('a program is updated')
+          console.log('a batch is updated')
         });
 
       } else {
 
     
-      
+      // add a new batch
         this.programSize = this.programSize + 1;
       //  this.batch.batchId = this.programSize.toString();
         this.batchList.push(this.batch);
@@ -189,7 +194,7 @@ this.programService.getPrograms().subscribe(list=>{
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Program Created',
+          detail: 'Batch Created',
           life: 3000,
         });
       }
