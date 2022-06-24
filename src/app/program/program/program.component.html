@@ -2,12 +2,14 @@
 <div class="signin-content">
     <mat-card>
         <mat-card-title>
-            <div class="box" >
+            <div class="box">
                 Manage Program<br>
-              </div><br>
+            </div><br>
             <div class="box">
                 <div>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedPrograms()" [disabled]="!selectedPrograms || !selectedPrograms.length"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-danger"
+                        (click)="deleteSelectedPrograms()"
+                        [disabled]="!selectedPrograms || !selectedPrograms.length"></button>
                 </div>
                 <div>
                     <span class="p-input-icon-left">
@@ -32,7 +34,6 @@
                 [(selection)]="selectedPrograms" [rowHover]="true" dataKey="programId"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                 [showCurrentPageReport]="true">
-
                 <ng-template pTemplate="header">
                     <tr>
                         <th style="width: 3rem">
@@ -45,8 +46,10 @@
                         </th>
                         <th pSortableColumn="programStatus">Program Status <p-sortIcon field="status"></p-sortIcon>
                         </th>
-                        <th> Edit / Delete
+                        <th> Edit Delete
                         </th>
+
+
                     </tr>
                 </ng-template>
 
@@ -98,13 +101,14 @@
 
         <div class="radio">
             <div>
-            <lable for="online">Status</lable>
+                <lable for="online">Status</lable>
             </div>
-            <div *ngFor="let category of status" >
-                <p-radioButton [inputId]="category" name="category" [value]="category" [(ngModel)]="program.programStatus"> 
+            <div *ngFor="let category of status">
+                <p-radioButton [inputId]="category" name="category" [value]="category"
+                    [(ngModel)]="program.programStatus">
                 </p-radioButton>
                 {{category}}
-            </div>          
+            </div>
         </div>
 
     </ng-template>
