@@ -4,7 +4,6 @@
   "scripts": {
     "ng": "ng",
     "start": "node sever.js ng serve --proxy-config proxy.config.json",
-
     "heroku-postbuild": "ng build ",
     "build": "ng build",
     "test": "ng test",

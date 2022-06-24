@@ -39,26 +39,7 @@ export class BatchComponent implements OnInit {
 
    programList :Program[];
    
-  //  = [
-  //   {
-  //     "programId": "9",
-  //     "programName": "dart-n-flutter",
-  //     "programDescription": "not launched course",
-  //     "programStatus": "notActive"
-  //   },
-  //   {
-  //     "programId": "12",
-  //     "programName": "MEAN stack",
-  //     "programDescription": "not launched course",
-  //     "programStatus": "notActive"
-  //   },
-  //   {
-  //     "programId": "2",
-  //     "programName": "restAssured",
-  //     "programDescription": "string",
-  //     "programStatus": "active"
-  //   }
-  // ]
+  
 
 
   constructor(
