@@ -164,8 +164,8 @@ this.programService.getPrograms().subscribe(list=>{
       //  this.batch.batchId = this.programSize.toString();
         this.batchList.push(this.batch);
         
-        const pro  = this.batch.programId;
-        this.batch.programId=pro.programId;
+        //const pro  = this.batch.programId;
+        //this.batch.programId=pro.programId;
         this.batch.programName = pro.programName;
 
         this.batchService.addBatch(this.batch).subscribe((res) => {
