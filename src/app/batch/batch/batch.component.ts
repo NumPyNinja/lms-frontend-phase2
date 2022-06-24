@@ -138,8 +138,8 @@ this.programService.getPrograms().subscribe(list=>{
 
     if (this.batch.batchName.trim()) {
 
-       const pro  = this.batch.programId;
-       this.batch.programId=pro.programId;
+     //  const pro  = this.batch.programId;
+     //  this.batch.programId=pro.programId;
       // this.batch.programName = pro.programName;
       //edit batch
       if (this.batch.batchId) {
