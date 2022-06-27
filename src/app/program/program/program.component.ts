@@ -169,10 +169,22 @@ export class ProgramComponent implements OnInit {
   private getProgramList() {
     this.visibility = true;
     this.programService.getPrograms().subscribe((res) => {
+      res = this.upperCaseProgramStatus(res);
       this.programs = res;
       this.programSize = this.getMaxProgramId(0);
       this.visibility = false;
     });
   }
+
+  upperCaseProgramStatus(arr) {
+
+    arr.forEach(element => {
+      const status = element.programStatus.charAt(0).toUpperCase() + element.programStatus.substring(1).toLowerCase();
+      element.programStatus = status;
+    })
+    return arr;
+
+  }
+
 }
 

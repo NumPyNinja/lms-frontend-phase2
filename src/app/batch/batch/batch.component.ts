@@ -32,6 +32,7 @@ export class BatchComponent implements OnInit {
   programSize: number;
   visibility: boolean = false;
   batchDialogue: boolean;
+  programName  : string;
 
   status: string[] = ['ACTIVE', 'INACTIVE'];
   // programList : Program[];
@@ -100,6 +101,7 @@ this.programService.getPrograms().subscribe(list=>{
   }
 
   editBatch(batch: Batch) {
+    this.programName =batch.programName;
     this.batch = { ...batch };
     this.batchDialogue = true;
   }
