@@ -140,9 +140,13 @@ this.programService.getPrograms().subscribe(list=>{
 
     if (this.batch.batchName.trim()) {
 
-       const pro  = this.batch.programId;
+       const pro :any  = this.batch.programName;
+
        this.batch.programId=pro.programId;
-      // this.batch.programName = pro.programName;
+
+       this.batch.programName = pro.programName;
+
+
       //edit batch
       if (this.batch.batchId) {
         this.batchList[this.findIndexById(this.batch.batchId )] = this.batch;
