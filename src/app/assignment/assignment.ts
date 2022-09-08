@@ -1,6 +1,6 @@
 export interface Assignment {
     
-    assignmentId?: number,
+    assignmentId?: string,
     assignmentName?: string,
     assignmentDescription?: string,
     assignmentComments?: string,
