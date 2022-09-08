@@ -23,6 +23,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { UserComponent } from './user/user/user.component';
 import { AssignmentComponent } from './assignment/assignment/assignment.component';
+import { AttendanceComponent } from './attendance/attendance/attendance.component';
+
 
 
 
@@ -36,6 +38,8 @@ import { AssignmentComponent } from './assignment/assignment/assignment.componen
     BatchComponent,
     UserComponent,
     AssignmentComponent,
+    AttendanceComponent,
+    
     
   ],
   imports: [
