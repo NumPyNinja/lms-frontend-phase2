@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { BatchComponent } from './batch/batch/batch.component';
 import { UserComponent } from './user/user/user.component';
 import { AssignmentComponent } from './assignment/assignment/assignment.component';
-
+import { AttendanceComponent } from './attendance/attendance/attendance.component';
 
 
 const routes: Routes = [
@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'batch', component: BatchComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'assignment', component: AssignmentComponent, canActivate: [AuthGuard] },
+  { path: 'attendance', component: AttendanceComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' },
 ];
 
