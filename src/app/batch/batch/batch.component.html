@@ -13,7 +13,7 @@
                 <div>
                     <span class="p-input-icon-left">
                         <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        <input pInputText type="text" id="filterGlobal" (input)="dt.filterGlobal($event.target.value, 'contains')"
                             placeholder="Search..." />
                     </span>
                 </div>
@@ -121,7 +121,7 @@
 
         <div class="p-field">
             <label for="programName">Program Name</label>
-            <p-dropdown [options]="programList" [(ngModel)]="batch.programName" placeholder="Select a Program name"
+            <p-dropdown [options]="programList" [(ngModel)]="batch.programName" placeholder="Select a Program name" id="programName"
                 editable="true" optionLabel="programName" [showClear]="true"></p-dropdown>
         </div>
 
@@ -130,7 +130,7 @@
                 <lable for="online">Status : </lable>
             </div>
             <div *ngFor="let category of status">
-                <p-radioButton [inputId]="category" name="category" [value]="category" [(ngModel)]="batch.batchStatus">
+                <p-radioButton [inputId]="category" name="category" [value]="category" [(ngModel)]="batch.batchStatus" id="batchStatus">
                 </p-radioButton>
                 {{category}}
             </div>
@@ -138,7 +138,7 @@
 
         <div class="p-field">
             <label for="batchNoOfClasses">Number of Classes</label>
-            <input type="text" id="batchNoOfClasses" pInputText [(ngModel)]="batch.batchNoOfClasses" required rows="3"
+            <input type="text" id="batchNoOfClasses" pInputText [(ngModel)]="batch.batchNoOfClasses" required rows="3" id="batchNoOfClasses"
                 cols="20" />
         </div>
 

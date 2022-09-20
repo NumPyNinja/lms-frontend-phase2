@@ -93,7 +93,7 @@
     </mat-card>
 </div>
 
-<p-dialog [(visible)]="assigmentDialogue" [style]="{width: '650px'}" header="Assigment Details" [modal]="true"
+<p-dialog [(visible)]="assigmentDialogue" [style]="{width: '550px'}" header="Assigment Details" [modal]="true"
     styleClass="p-fluid">
     <ng-template pTemplate="content">
         <div class="p-field">
@@ -113,11 +113,22 @@
                 rows="3" cols="20" />
         </div>
 
-        <div class="p-field p-col-12 p-md-4">
+        <!-- <div class="p-field">
+            <label for="programDescription">Assignment Due Date</label>
+            <input type="text" id="assignmentDueDate" pInputText [(ngModel)]="assignment.assignmentDueDate" required
+                rows="3" cols="20" />
+        </div> -->
+
+        <div class="p-field">
             <label for="icon">Assignment Due Date</label>
-            <p-calendar [(ngModel)]="assignment.assignmentDueDate" [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy" 
-                [style]="{ 'position': 'relative', 'z-index': '100'}"></p-calendar>
+            <p-calendar [(ngModel)]="assignment.assignmentDueDate" [showIcon]="true" inputId="icon"
+                [style]="{ 'position': 'relative', 'z-index': '100' }"></p-calendar>
         </div>
+
+
+
+
+       
 
     </ng-template>
     <ng-template pTemplate="footer">

@@ -25,7 +25,8 @@ import { UserComponent } from './user/user/user.component';
 import { AssignmentComponent } from './assignment/assignment/assignment.component';
 import { AttendanceComponent } from './attendance/attendance/attendance.component';
 
-
+import {ListboxModule} from 'primeng/listbox';
+import { TestDirective } from './test.directive';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { AttendanceComponent } from './attendance/attendance/attendance.componen
     UserComponent,
     AssignmentComponent,
     AttendanceComponent,
+    TestDirective,
     
     
   ],
@@ -55,7 +57,8 @@ import { AttendanceComponent } from './attendance/attendance/attendance.componen
     MatButtonModule,
     MatSelectModule,
     MatRadioModule,
-    MatCardModule
+    MatCardModule,
+    ListboxModule,
   ],
   providers: [AuthService, AuthGuard, MessageService, ConfirmationService],
   bootstrap: [AppComponent]

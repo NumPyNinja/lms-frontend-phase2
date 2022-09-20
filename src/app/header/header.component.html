@@ -3,10 +3,10 @@
       LMS - Learning Management System 
     </span>
     <span class="fill-remaining-space"></span>
-    <button mat-button a routerLink="/program">Program</button>
-    <button mat-button a routerLink="/batch">Batch</button>
-    <button mat-button a routerLink="/user">User</button>
-    <button mat-button a routerLink="/assignment">Assignment</button>
-    <button mat-button a routerLink="/attendance">Attendance</button>
-    <button mat-button (click)="onLogout()" *ngIf="isLoggedIn">Logout</button>
+    <button  id="program" mat-button a routerLink="/program">Program</button>
+    <button id="batch"  mat-button a routerLink="/batch">Batch</button>
+    <button id="user"  mat-button a routerLink="/user">User</button>
+    <button id="assignment" mat-button a routerLink="/assignment">Assignment</button>
+    <button id="attendance"  mat-button a routerLink="/attendance">Attendance</button>
+    <button id="logout"  mat-button (click)="onLogout()" *ngIf="isLoggedIn">Logout</button>
   </mat-toolbar>
