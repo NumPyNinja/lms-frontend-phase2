@@ -14,7 +14,7 @@
                 <div>
                     <span class="p-input-icon-left">
                         <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        <input pInputText type="text" id="filterGlobal" (input)="dt.filterGlobal($event.target.value, 'contains')"
                             placeholder="Search..." />
                     </span>
                 </div>
@@ -65,11 +65,11 @@
                             <div class="action">
                                 <span>
                                     <button pButton pRipple icon="pi pi-pencil"
-                                        class="p-button-rounded p-button-success"
+                                        class="p-button-rounded p-button-success" id="editProgram"
                                         (click)="editProgram(program)"></button>
                                 </span>
                                 <span>
-                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" id="deleteProgram"
                                         (click)="deleteProgram(program)"></button>
                                 </span>
                             </div>
@@ -104,7 +104,7 @@
                 <lable for="online">Status</lable>
             </div>
             <div *ngFor="let category of status">
-                <p-radioButton [inputId]="category" name="category" [value]="category"
+                <p-radioButton [inputId]="category" name="category" [value]="category" id="category"
                     [(ngModel)]="program.programStatus">
                 </p-radioButton>
                 {{category}}
@@ -115,7 +115,7 @@
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-rounded p-button-danger"
             (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-rounded p-button-success"
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-rounded p-button-success" id="saveProgram"
             (click)="saveProgram()"></button>
     </ng-template>
 </p-dialog>

@@ -34,7 +34,6 @@ import { MatRadioModule } from '@angular/material/radio';
 
 
 
-
 @NgModule({
   exports: [
     MatToolbarModule,
@@ -68,11 +67,11 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDividerModule,
     MatRadioModule,
   
-    
+
     CalendarModule,
 		SliderModule,
 		DialogModule,
-		MultiSelectModule,
+
 		ContextMenuModule,
 		DropdownModule,
 		ButtonModule,
