@@ -40,9 +40,9 @@ export class AttendanceComponent implements OnInit {
     private programService: ProgramService,
     private confirmationService: ConfirmationService) {
 
-    this.attendanceService.getProgramUserDetails().subscribe(res => {
-      console.log(res);
-    })
+    // this.attendanceService.getProgramUserDetails().subscribe(res => {
+    //   console.log(res);
+    // })
 
     this.programService.getPrograms().subscribe(list => {
       this.programList = list;
@@ -158,13 +158,13 @@ export class AttendanceComponent implements OnInit {
   onChange(event: any) {
     console.log('Test' + event);
     this.users =[];
-    this.attendanceService.getProgramUserDetails().subscribe(res => {
-      res.forEach(item => {
-        if (item.programId == event.value.programId) {
-          this.users = item.users;
-        }
-      })
-    })
+    // this.attendanceService.getProgramUserDetails().subscribe(res => {
+    //   res.forEach(item => {
+    //     if (item.programId == event.value.programId) {
+    //       this.users = item.users;
+    //     }
+    //   })
+    // })
   }
   users: any;
 }

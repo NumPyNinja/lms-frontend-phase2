@@ -146,6 +146,7 @@ export class ProgramComponent implements OnInit {
 
   findIndexById(id: string): number {
     let index = -1;
+    if(this.programs !== undefined)
     for (let i = 0; i < this.programs.length; i++) {
       if (this.programs[i].programId === id) {
         index = i;
