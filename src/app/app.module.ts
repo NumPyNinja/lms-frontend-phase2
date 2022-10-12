@@ -26,7 +26,7 @@ import { AssignmentComponent } from './assignment/assignment/assignment.componen
 import { AttendanceComponent } from './attendance/attendance/attendance.component';
 
 import {ListboxModule} from 'primeng/listbox';
-import { TestDirective } from './test.directive';
+
 
 
 @NgModule({
@@ -40,7 +40,7 @@ import { TestDirective } from './test.directive';
     UserComponent,
     AssignmentComponent,
     AttendanceComponent,
-    TestDirective,
+
     
     
   ],
