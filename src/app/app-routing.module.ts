@@ -8,11 +8,12 @@ import { BatchComponent } from './batch/batch/batch.component';
 import { UserComponent } from './user/user/user.component';
 import { AssignmentComponent } from './assignment/assignment/assignment.component';
 import { AttendanceComponent } from './attendance/attendance/attendance.component';
-
+import { RegistrationComponent } from './registration/registration/registration.component';   
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component:RegistrationComponent , canActivate: [AuthGuard] },
   { path: 'batch', component: BatchComponent, canActivate: [AuthGuard] },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'assignment', component: AssignmentComponent, canActivate: [AuthGuard] },

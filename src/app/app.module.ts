@@ -26,6 +26,8 @@ import { AssignmentComponent } from './assignment/assignment/assignment.componen
 import { AttendanceComponent } from './attendance/attendance/attendance.component';
 
 import {ListboxModule} from 'primeng/listbox';
+import { RegistrationComponent } from './registration/registration/registration.component';
+
 
 
 
@@ -40,9 +42,7 @@ import {ListboxModule} from 'primeng/listbox';
     UserComponent,
     AssignmentComponent,
     AttendanceComponent,
-
-    
-    
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
