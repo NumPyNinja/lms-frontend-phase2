@@ -158,6 +158,7 @@ input {
   width: 100%;
 }
 
+
 .signup-card {
   min-width: 120px;
   margin: 10px auto;
@@ -166,6 +167,14 @@ input {
 .mat-radio-button {
   display: block;
   margin: 5px 0;
+}
+
+.login-button {
+  background: #FFCC99;
+}
+
+.signup-button {
+  background: rgba(190, 241, 190, 0.841);
 }
 
 .row {
