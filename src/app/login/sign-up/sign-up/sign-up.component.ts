@@ -10,11 +10,13 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignupComponent implements OnInit {
+  form: FormGroup;
 
   constructor(private signupService: SignUpService,private fb: FormBuilder,private messageService: MessageService,
     private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
+   
   }
 
   signupForm = this.fb.group({
@@ -34,7 +36,7 @@ export class SignupComponent implements OnInit {
     emailAddress: [null, Validators.required],
     password: [null, Validators.required]
   });
-   
+
   
   states = [
     { name: 'Alabama', abbreviation: 'AL' },
@@ -102,5 +104,5 @@ export class SignupComponent implements OnInit {
   onSubmit() {
         // need to write code
   }
-
+  
 }
