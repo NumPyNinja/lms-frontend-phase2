@@ -1,0 +1,26 @@
+[
+    {
+        "classId": 1,
+        "batchId": 1,
+        "classNo": 1,
+        "classDate":"2022-09-21",
+        "classTopic":"SQL",
+        "staffId":"U02",
+        "classDescription":"SQL Class",
+        "classComments": "Comments",
+        "classNotes":"C:\\classNotes",
+        "classRecording":"C:\\Recordings"
+    },
+    {
+        "classId": 2,
+        "batchId": 1,
+        "classNo": 3,
+        "classDate":"2022-12-21",
+        "classTopic":"Selenium ",
+        "staffId":"U02",
+        "classDescription":"Selenium Class",
+        "classComments": "Comments",
+        "classNotes":"C:\\classNotes",
+        "classRecording":"C:\\Recordings"
+    }
+]

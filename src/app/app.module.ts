@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule , CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +26,7 @@ import { AssignmentComponent } from './assignment/assignment/assignment.componen
 import { AttendanceComponent } from './attendance/attendance/attendance.component';
 
 import {ListboxModule} from 'primeng/listbox';
+import { SessionComponent } from './session/session/session.component';
 
 
 
@@ -40,6 +41,7 @@ import {ListboxModule} from 'primeng/listbox';
     UserComponent,
     AssignmentComponent,
     AttendanceComponent,
+    SessionComponent,
 
     
     
