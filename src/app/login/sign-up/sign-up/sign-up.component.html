@@ -11,7 +11,7 @@
                 </div>
                 <div>
                          <span class="label"> I already have an account </span>
-                        <button id="login" mat-raised-button class="login-button" type="submit">Login</button>
+                        <button id="login" mat-raised-button class="login-button" a routerLink="/login">Login</button>
                 </div>
             </div>
         </mat-card-title>
@@ -93,7 +93,7 @@
 
                     <div class="col">
                       <mat-form-field class="full-width">
-                        <input matInput #birthDate  type="date" required> 
+                        <input matInput #birthDate placeholder="Date of Birth" type="date" formControlName="birthDate"> 
                           
                         <mat-error *ngIf="signupForm.controls['birthDate'].hasError('required')">
                           birthDate is <strong>required</strong>
@@ -112,15 +112,16 @@
                  <div class="row">
                   <div class="col">
                     <mat-form-field class="full-width">
-                      <input matInput placeholder="User name" formControlName="userName">
-                      <mat-error *ngIf="signupForm.controls['userName'].hasError('required')">
-                        User name is <strong>required</strong>
+                      <input matInput placeholder="Email address" formControlName="emailAddress">
+                      <mat-error *ngIf="signupForm.controls['emailAddress'].hasError('required')">
+                        Email address is <strong>required</strong>
                       </mat-error>
                     </mat-form-field>
                   </div>
                   <div class="col">
                     <mat-form-field class="full-width">
-                      <input matInput placeholder="Phone Number" formControlName="phoneNumber">
+                      <input matInput #phoneNumber type="number" placeholder="Contact Number" formControlName="phoneNumber">
+                      <mat-hint align="end">{{phoneNumber.value.length}}/10</mat-hint>
                       <mat-error *ngIf="signupForm.controls['phoneNumber'].hasError('required')">
                         Phone number is <strong>required</strong>
                       </mat-error>
@@ -131,9 +132,9 @@
                 <div class="row">
                   <div class="col">
                     <mat-form-field class="full-width">
-                      <input matInput placeholder="Email address" formControlName="emailAddress">
-                      <mat-error *ngIf="signupForm.controls['emailAddress'].hasError('required')">
-                        Email address is <strong>required</strong>
+                      <input matInput placeholder="User name" formControlName="userName">
+                      <mat-error *ngIf="signupForm.controls['userName'].hasError('required')">
+                        User name is <strong>required</strong>
                       </mat-error>
                     </mat-form-field>
                   </div>

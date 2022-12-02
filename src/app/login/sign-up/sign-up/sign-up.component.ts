@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { SignUpService } from '../sign-up.service';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import { SignUpService } from '../sign-up.service';
+import {SignUp } from '../sign-up';
 
 @Component({
   selector: 'app-signup',
@@ -10,17 +11,21 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignupComponent implements OnInit {
-  form: FormGroup;
+  
+  signupForm: FormGroup;
+  signup : SignUp;
 
-  constructor(private signupService: SignUpService,private fb: FormBuilder,private messageService: MessageService,
-    private confirmationService: ConfirmationService) { }
+  constructor(
+    private signupService: SignUpService,
+    private fb: FormBuilder,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
+    ) { }
 
   ngOnInit(): void {
    
-  }
-
-  signupForm = this.fb.group({
-    user_id:[],
+    this.signupForm= this.fb.group({
+    signup_id:[],
     firstName: [null, Validators.required],
     lastName: [null, Validators.required],
     address: [null, Validators.required],
@@ -32,11 +37,12 @@ export class SignupComponent implements OnInit {
     ],
     birthDate: [null, Validators.required],
     userName: [null, Validators.required],
-    phoneNumber: [null, Validators.required],
+    phoneNumber: [null, Validators.compose(
+      [Validators.required, Validators.minLength(10),Validators.maxLength(10)])],
     emailAddress: [null, Validators.required],
     password: [null, Validators.required]
   });
-
+  }
   
   states = [
     { name: 'Alabama', abbreviation: 'AL' },
@@ -102,7 +108,22 @@ export class SignupComponent implements OnInit {
 
 
   onSubmit() {
-        // need to write code
+       
+        if(this.signupForm.valid){
+          console.log(this.signupForm.value);
+      
+          this.signupService.addSignupUser(this.signupForm.value).subscribe((res) => {
+            this.messageService.add(
+              {
+                severity : 'success',
+                summary : 'Successful' ,
+                detail: 'Sign-up successful',
+                life: 3000
+              }
+            )
+          console.log("Sign Up successful!");
+        });
+      }
   }
   
 }
