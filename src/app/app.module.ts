@@ -26,10 +26,12 @@ import { AssignmentComponent } from './assignment/assignment/assignment.componen
 import { AttendanceComponent } from './attendance/attendance/attendance.component';
 
 import {ListboxModule} from 'primeng/listbox';
+import { SignupComponent } from './login/sign-up/sign-up/sign-up.component';
 import { ClassComponent } from './class/class/class.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
 import { VerificationCodeComponent } from './login/forgot-password/verification-code/verification-code.component';
+
 
 
 
@@ -44,14 +46,14 @@ import { VerificationCodeComponent } from './login/forgot-password/verification-
     UserComponent,
     AssignmentComponent,
     AttendanceComponent,
+    SignupComponent,
     ClassComponent,
     SignUpComponent,
     ForgotPasswordComponent,
-    VerificationCodeComponent,
+    VerificationCodeComponent
 
-    
-    
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -66,7 +68,7 @@ import { VerificationCodeComponent } from './login/forgot-password/verification-
     MatSelectModule,
     MatRadioModule,
     MatCardModule,
-    ListboxModule,
+    ListboxModule
   ],
   providers: [AuthService, AuthGuard, MessageService, ConfirmationService],
   bootstrap: [AppComponent]
