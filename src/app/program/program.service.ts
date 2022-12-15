@@ -8,13 +8,13 @@ import { Program } from './program';
 })
 export class ProgramService {
 
-  url: string = '/api'; //ttps://lms-phase2.herokuapp.com/lms/",
+  url: string = '/api'; //https://lms-phase2.herokuapp.com/lms/",
 
   constructor(private httpClient: HttpClient) { }
 
   getPrograms(): Observable<Program[]> {
     // return this.httpClient.get<Program[]>('assets/Programs.json')
-    return this.httpClient.get<Program[]>(this.url + "/allPrograms"); //https://lms-phase2.herokuapp.com/lms/allPrograms
+   return this.httpClient.get<Program[]>(this.url + "/allPrograms"); //https://lms-phase2.herokuapp.com/lms/allPrograms
   }
 
   addProgram(program: Program): Observable<Program> {

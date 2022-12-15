@@ -26,7 +26,7 @@ export class UserComponent implements OnInit {
   role = new FormControl();
   
   userRole:string[]=['Admin','Staff','Student'];
-
+  visaTypes: string[] = ['H1B','H4EAD','GC'];
 
   constructor(private userService: UserService,private fb: FormBuilder,private messageService: MessageService,
     private confirmationService: ConfirmationService) { }
@@ -62,33 +62,34 @@ export class UserComponent implements OnInit {
 
   userForm = this.fb.group({
     user_id:[],
-    firstName: [null, Validators.required],
-    middleName: [null, Validators.required],
-    lastName: [null, Validators.required],
+    userFirstName: [null, Validators.required],
+    userMiddleName: [null, Validators.required],
+    userLastName: [null, Validators.required],
     emailAddress: [null, Validators.required],
-    phoneNumber: [null, Validators.required],
-    linkedUrl: [null, Validators.required],
+    userPhoneNumber: [null, Validators.required],
+    userLinkedinUrl: [null, Validators.required],
     program: [null, Validators.required],
-    ugProgram: [null, Validators.required],
-    pgProgram: [null, Validators.required],
-    skill: [null, Validators.required],
-    prevExp: [null, Validators.required],
+    userEduUg: [null, Validators.required],
+    userEduPg: [null, Validators.required],
+    userTimeZone:[null, Validators.required],
+  //  skill: [null, Validators.required],
+  //  prevExp: [null, Validators.required],
     experience: [null, Validators.required],
-    comments: [null, Validators.required],
+    usercomments: [null, Validators.required],
     fileType: [null, Validators.required],
     location:[],
     userRole: [null, Validators.required],
-    batch: [null, Validators.required],
+  //  batch: [null, Validators.required],
     visaStatus: [null, Validators.required],
     userName: [null, Validators.required],
     password: [null, Validators.required],
-    address: [null, Validators.required],
-    city: [null, Validators.required],
-    state: [null, Validators.required],
-    postalCode: [null, Validators.compose([
-      Validators.required, Validators.minLength(5), Validators.maxLength(5)])
-    ],
-    shippig: ['free', Validators.required]
+  //  address: [null, Validators.required],
+   // city: [null, Validators.required],
+    //state: [null, Validators.required],
+    //postalCode: [null, Validators.compose([
+   //   Validators.required, Validators.minLength(5), Validators.maxLength(5)])
+   // ],
+   // shippig: ['free', Validators.required]
 
   });
 
@@ -231,7 +232,7 @@ export class UserComponent implements OnInit {
   deleteUser(user: User) {
     this.confirmationService.confirm({
         
-        message: 'Are you sure you want to delete ' + user.firstName + " " + user.middleName + " " + user.lastName +'?',
+       // message: 'Are you sure you want to delete ' + user.userFirstName? + " " + user.userMiddleName+ " " + user.lastName +'?',
         header: 'Confirm',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
