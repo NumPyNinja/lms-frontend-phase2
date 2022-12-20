@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target":"https://lms-phase2.herokuapp.com/lms/",
+    "target":"http://lms-backend-service.herokuapp.com/lms/",
     "pathRewrite": {
       "^/api": ""
     },
