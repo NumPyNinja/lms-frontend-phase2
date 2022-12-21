@@ -12,7 +12,7 @@ export interface User {
     userEduUg?: string;
     userEduPg?: string,
     userTimeZone?: string,
-    user_id?:string,
+    userId?:string,
     userRoleMaps?: UserRoleMaps;
     userName?: string;
     password?: string;
