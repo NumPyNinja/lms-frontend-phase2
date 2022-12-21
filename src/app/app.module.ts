@@ -28,7 +28,6 @@ import { AttendanceComponent } from './attendance/attendance/attendance.componen
 import {ListboxModule} from 'primeng/listbox';
 import { SignupComponent } from './login/sign-up/sign-up/sign-up.component';
 import { ClassComponent } from './class/class/class.component';
-import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
 import { VerificationCodeComponent } from './login/forgot-password/verification-code/verification-code.component';
 
@@ -48,7 +47,6 @@ import { VerificationCodeComponent } from './login/forgot-password/verification-
     AttendanceComponent,
     SignupComponent,
     ClassComponent,
-    SignUpComponent,
     ForgotPasswordComponent,
     VerificationCodeComponent
 
