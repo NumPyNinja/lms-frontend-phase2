@@ -21,12 +21,16 @@ export class UserComponent implements OnInit {
   submitted: boolean;
   userDialogue : boolean = false;
   viewUserDialogue:boolean=false;
+  //to save user profile picture
+  imageFile : any = File;
+  resumeFile : any = File;
 
 
   role = new FormControl();
   
   userRole:string[]=['Admin','Staff','Student'];
-  visaTypes: string[] = ['H1B','H4EAD','GC'];
+  visaTypes: string[] = ['Not-Specified', 'NA', 'GC-EAD', 'H4-EAD', 'H4', 'H1B', 
+  'Canada-EAD', 'Indian-Citizen', 'US-Citizen', 'Canada-Citizen'];
 
   constructor(private userService: UserService,private fb: FormBuilder,private messageService: MessageService,
     private confirmationService: ConfirmationService) { }
@@ -61,7 +65,7 @@ export class UserComponent implements OnInit {
   }
 
   userForm = this.fb.group({
-    user_id:[],
+    userId:[],
     userFirstName: [null, Validators.required],
     userMiddleName: [null, Validators.required],
     userLastName: [null, Validators.required],
@@ -179,9 +183,9 @@ export class UserComponent implements OnInit {
     this.submitted = true;
 
     if (this.userForm.value) {
-      if (this.userForm.value.user_id) {
+      if (this.userForm.value.userId) {
 
-        this.users[this.findIndexById(this.userForm.value.user_id)] = this.userForm.value.user_id;
+        this.users[this.findIndexById(this.userForm.value.userId)] = this.userForm.value.userId;
       //  this.users[this.findIndexById(this.userForm.u)]
         // this.messageService.add({
         //   severity: 'success',
@@ -196,8 +200,8 @@ export class UserComponent implements OnInit {
       } else {
        console.log('hjgjhgjhg');
         this.userSize = this.userSize + 1;
-        this.user.user_id = this.userSize.toString();
-        this.users.push(this.userForm.value);
+        this.user.userId = this.userSize.toString();
+        //this.users.push(this.userForm.value);
 
         // this.programService.addProgram(this.program).subscribe((res) => {
         // });
@@ -209,12 +213,34 @@ export class UserComponent implements OnInit {
         //   detail: 'Program Created',
         //   life: 3000,
         // });
-
       }
+        const userData = new FormData();
+        
+        userData.append("userInfo", JSON.stringify(this.userForm.value));
+        userData.append("imageFile", this.imageFile);
+        userData.append("resume",this.resumeFile);
+        
+        this.userService.addUser(userData).subscribe({
+          next:(res) => {
+            //alert("Patient added Successfully!");
+            this.userForm.reset();
+            //this.userDialogue.close("Patient's details saved.");
+            alert("User added successfully");
+          },
+         error:() =>
+          {
+          
+            alert("Error adding user details.");
+          }
+        })
+
+      //}
 
       this.users = [...this.users];
       this.userDialogue = false;
       this.user= {};
+
+      
     }
   }
   deleteSelectedUsers() {
@@ -236,7 +262,7 @@ export class UserComponent implements OnInit {
         header: 'Confirm',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-            this.users = this.users.filter(val => val.user_id !== user.user_id);
+            this.users = this.users.filter(val => val.userId !== user.userId);
             //this.user = {};
             this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Deleted', life: 3000});
         }
@@ -246,12 +272,28 @@ export class UserComponent implements OnInit {
   findIndexById(id: string): number {
     let index = -1;
     for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].user_id === id) {
+      if (this.users[i].userId === id) {
         index = i;
         break;
       }
     }
     return index;
+  }
+
+  saveImage(event:any){
+   
+    const imageFile =event.target.files[0];
+        console.log(imageFile);
+        this.imageFile = imageFile;
+
+  }
+
+  saveFile(event:any){
+   
+    const file =event.target.files[0];
+        console.log(file);
+        this.resumeFile = file;
+
   }
 
 }
