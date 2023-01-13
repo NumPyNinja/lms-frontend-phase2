@@ -1,0 +1,23 @@
+{
+  "userComments": "post method",
+  "userVisaStatus": "H4",
+  "userFirstName": "C V Raman",
+  "userMiddleName": "",
+  "userLastName": "Raman",
+  "userPhoneNumber": "3333333333",
+  "userLocation": "India",
+  "userLinkedinUrl": "www.linkedin.com/Raman123",
+  "userEduUg": "mca",
+  "userEduPg": "mba",
+  "userTimeZone": "IST",
+  "userRoleMaps":[
+          {
+          "roleId": "R03",
+          "userRoleStatus":"Active"
+          },
+          {
+            "roleId": "R01", 
+            "userRoleStatus":"Active"
+          }
+      ]
+  }
