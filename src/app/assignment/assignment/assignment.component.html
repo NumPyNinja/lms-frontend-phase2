@@ -22,6 +22,33 @@
                         class="p-button-rounded p-button-success" (click)="openNew()"></button>
                 </div>
 
+                <button type="button" label="Show" pButton pRipple id="new" label="Upload Assignment" icon="pi pi-plus"
+                    class="p-button-rounded p-button-success" (click)="showDialog()"> </button>
+                <p-dialog header="Upload Assigment" [(visible)]="displayUploadAssignmentDialog"
+                    [style]="{width: '55vw'}" [draggable]="false">
+                    <div class="card">
+                        <div class="field">
+                            <input id="Path" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path"
+                                size="100"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                             border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+                        </div>
+                    </div>
+                    <div>
+                        <p-dropdown [options]="assignmentSelectList" [virtualScroll]="true" [editable]="true"
+                            appendTo="body" [(ngModel)]="selectedUploadAssignment" placeholder="Select Assignment"
+                            optionLabel="assignmentName"></p-dropdown>
+                    </div>
+                    <ng-template pTemplate="footer">
+                        <p-button (click)="uploadAssignment()" label="Upload" icon="pi pi-times"
+                            styleClass="p-button-rounded p-button-success">
+                        </p-button>
+                        <p-button (click)="closePopup()" label="Cancel" icon="pi pi-times"
+                            styleClass="p-button-rounded p-button-danger">
+                        </p-button>
+                    </ng-template>
+                </p-dialog>
+
             </div>
         </mat-card-title>
         <mat-card-content>
@@ -124,12 +151,6 @@
             <p-calendar [(ngModel)]="assignment.assignmentDueDate" [showIcon]="true" inputId="icon"
                 [style]="{ 'position': 'relative', 'z-index': '100' }"></p-calendar>
         </div>
-
-
-
-
-       
-
     </ng-template>
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-rounded p-button-danger"
@@ -138,4 +159,5 @@
             (click)="saveAssignment()"></button>
     </ng-template>
 </p-dialog>
+<p-messages [(value)]="message1"></p-messages>
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
