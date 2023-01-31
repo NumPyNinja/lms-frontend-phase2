@@ -1,2 +1,7 @@
-export class Class {
+export interface Class {
+  csId:number;
+  classTopic:string;
 }
+
+
+

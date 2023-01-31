@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
+import { Class } from 'src/app/class/class';
+import { ClassService } from 'src/app/class/class.service';
 import { Program } from 'src/app/program/program';
 import { ProgramService } from 'src/app/program/program.service';
-import { Assignment } from '../../../app/assignment/assignment';
-import { AssignmentService } from '../../../app/assignment/assignment.service';
 import { Attendance } from '../attendance';
 import { AttendanceService } from '../attendance.service';
 
@@ -18,27 +18,28 @@ import { AttendanceService } from '../attendance.service';
 })
 export class AttendanceComponent implements OnInit {
   selectedCountries: any[];
-  assignments: Assignment[];
+  attendances: Attendance[];
   countries: Attendance[];
-  assignmentSize: number;
-  selectedAssignments: Assignment[];
+  attendanceSize: number;
+  selectedAttendances: Attendance[];
   visibility: boolean = false;
-  assignment: Assignment;
-  assigmentDialogue: boolean;
-  selectedAssigment: Assignment[];
+  attendance: Attendance;
+  attendanceDialogue: boolean;
+  selectedAttendance: Attendance[];
   submitted: boolean;
   programList: Program[];
-
   selectedProgram: string;
+  classList: Class[];
+  selectedClass: string[];
 
-  attendanceList: any[];
 
   constructor(
     private attendanceService: AttendanceService,
-    private assignmentService: AssignmentService,
+    //private attendanceService: AttendanceService,
     private messageService: MessageService,
     private programService: ProgramService,
-    private confirmationService: ConfirmationService) {
+    private confirmationService: ConfirmationService,
+    private classService: ClassService) {
 
     // this.attendanceService.getProgramUserDetails().subscribe(res => {
     //   console.log(res);
@@ -49,105 +50,110 @@ export class AttendanceComponent implements OnInit {
     })
   }
 
-
-
-
   ngOnInit(): void {
-    this.getAssignmentList();
+    this.getAttendanceList();
 
   }
 
-  private getMaxAssignmentId(max: number) {
-    this.assignments.forEach((character) => {
-      const tempAssignmentId = Number(character.assignmentId);
-
-      if (tempAssignmentId > max) {
-        max = tempAssignmentId;
-      }
-    });
-    return max;
-  }
-  private getAssignmentList() {
+  private getAttendanceList() {
     this.visibility = true;
-    this.assignmentService.getAssignments().subscribe((res) => {
-      this.assignments = res;
-      this.assignmentSize = this.getMaxAssignmentId(0);
+    this.attendanceService.getAttendanceList().subscribe((res) => {
+      this.attendances = res;
+      console.log('Backend data' + res)
+      this.attendanceSize = this.getMaxAttendanceId(0);
       this.visibility = false;
     });
   }
 
-  //add a new assignment 
-  openNew() {
-    this.assignment = {};
+  private getMaxAttendanceId(max: number) {
+    this.attendances.forEach((character) => {
+      const tempAttendanceId = Number(character.attId);
+
+      if (tempAttendanceId > max) {
+        max = tempAttendanceId;
+      }
+    });
+    return max;
+  }
+
+
+  //add a new attendance 
+  async openNew() {
+    this.attendance = {};
     this.submitted = false;
-    this.assigmentDialogue = true;
+    this.attendanceDialogue = true;
+   await this.classService.getClassList().subscribe(res => {
+     console.log('kjhkhjkhjkhkjhk'+res)
+      this.classList = res;
+
+    })
   }
 
   //save an assigment
-  saveAssignment() {
+  saveAttendance() {
 
     this.submitted = true;
-    if (this.assignment.assignmentName.trim()) {
-      if (this.assignment.assignmentBatchId) {
-        this.assignments[this.findIndexById(this.assignment.assignmentId)] = this.assignment;
+    if (this.attendance.attId.trim()) {
+      if (this.attendance.attId) {
+        this.attendances[this.findIndexById(this.attendance.attId)] = this.attendance;
 
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Assignment Updated',
+          detail: 'Attendance Updated',
           life: 3000,
         });
 
         ;
       } else {
-        this.assignmentSize = this.assignmentSize + 1;
-        this.assignment.assignmentBatchId = this.assignmentSize;
-        this.assignments.push(this.assignment);
+        this.attendanceSize = this.attendanceSize + 1;
+        // this.attendance.attendanceId = this.attendanceSize; //TODO need to be checked
+        this.attendances.push(this.attendance);
 
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Assignment Created',
+          detail: 'Attendance Created',
           life: 3000,
         });
 
       }
-      this.assignments = [...this.assignments];
-      this.assigmentDialogue = false;
-      this.assignment = {};
+      this.attendances = [...this.attendances];
+      this.attendanceDialogue = false;
+      this.attendance = {};
 
     }
 
   }
 
-  deleteAssigment(assigment: Assignment) {
+  deleteAttendance(attendance: Attendance) {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + assigment.assignmentName + '?',
+      message: 'Are you sure you want to delete ' + attendance.attId + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.assignments = this.assignments.filter((val) => val.assignmentId !== assigment.assignmentId);
+        this.attendances = this.attendances.filter((val) => val.attId !== attendance.attId);
 
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Assgigment Deleted',
+          detail: 'Attendance Deleted',
           life: 3000,
         });
       },
     });
   }
 
-  editAssignment(assigment: Assignment) {
-    this.assignment = { ...assigment };
-    this.assigmentDialogue = true;
+  editAttendance(attendance: Attendance) {
+    this.attendance = { ...this.attendance };
+    this.attendanceDialogue = true;
   }
 
 
   findIndexById(id: string): number {
     let index = -1;
-    for (let i = 0; i < this.assignments.length; i++) {
-      if (this.assignments[i].assignmentId === id) {
+    for (let i = 0; i < this.attendances.length; i++) {
+      if (this.attendance[i].attendanceId === id) {
         index = i;
         break;
       }
@@ -157,7 +163,7 @@ export class AttendanceComponent implements OnInit {
 
   onChange(event: any) {
     console.log('Test' + event);
-    this.users =[];
+    this.users = [];
     // this.attendanceService.getProgramUserDetails().subscribe(res => {
     //   res.forEach(item => {
     //     if (item.programId == event.value.programId) {
