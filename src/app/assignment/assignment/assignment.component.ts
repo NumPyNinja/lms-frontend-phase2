@@ -103,7 +103,7 @@ export class AssignmentComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Assgigment Deleted',
+          detail: 'Assignment Deleted',
           life: 3000,
         });
       },

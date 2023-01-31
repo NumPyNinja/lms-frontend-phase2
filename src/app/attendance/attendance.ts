@@ -1,7 +1,10 @@
-export class Attendance {
-    attendanceId?: string;
+export interface Attendance {
+    attId?: string;
+    csId?:string;
+    studentId?:string;
     programName?: string;
-    programId: string;
-    users: []
+    programId?: string;
+    users?: [] ;
     attendance?: string;
+    attendanceList?:[];
 }
