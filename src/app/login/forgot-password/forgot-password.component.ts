@@ -13,6 +13,7 @@ export class ForgotPasswordComponent implements OnInit {
   hide = true;
   textInput = 'Link has sent on your registered email !!!';
   firstFormGroup: FormGroup;
+  showError: boolean;
 
   constructor(private fb: FormBuilder) { }
   ngOnInit(): void {
@@ -24,14 +25,19 @@ export class ForgotPasswordComponent implements OnInit {
 
   }
   getEmailErrorMessage() {
-    return this.email.hasError('required') ? '' :
-      this.email.hasError('email') ? 'Not a valid email' :
+    return this.email.hasError('required') ? 'Email address is required' :
+      this.email.hasError('email') ? 'Please enter a valid email address' :
         '';
   }
   onClick() {
-
-    this.displayValue = this.textInput;
+    if (this.email.invalid) {
+      this.showError = true;
+    } else {
+      this.showError = false;
+      this.displayValue = this.textInput;
+    }
   }
+
   get email() { return this.firstFormGroup.get('email'); }
 
 
