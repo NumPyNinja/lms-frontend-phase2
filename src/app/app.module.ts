@@ -30,6 +30,10 @@ import { SignupComponent } from './login/sign-up/sign-up/sign-up.component';
 import { ClassComponent } from './class/class/class.component';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
 import { VerificationCodeComponent } from './login/forgot-password/verification-code/verification-code.component';
+import { DropdownModule } from 'primeng/dropdown';
+import {MessagesModule} from 'primeng/messages';
+
+
 
 
 
@@ -66,7 +70,10 @@ import { VerificationCodeComponent } from './login/forgot-password/verification-
     MatSelectModule,
     MatRadioModule,
     MatCardModule,
-    ListboxModule
+    ListboxModule,
+    DropdownModule,
+    MessagesModule
+    
   ],
   providers: [AuthService, AuthGuard, MessageService, ConfirmationService],
   bootstrap: [AppComponent]
