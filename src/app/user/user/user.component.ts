@@ -26,6 +26,7 @@ export class UserComponent implements OnInit {
   role = new FormControl();
   
   userRole:string[]=['Admin','Staff','Student'];
+  visaStatus:string[]=['H4 Applied', 'L2 Applied']
 
 
   constructor(private userService: UserService,private fb: FormBuilder,private messageService: MessageService,
@@ -61,7 +62,7 @@ export class UserComponent implements OnInit {
   }
 
   userForm = this.fb.group({
-    user_id:[],
+    userId:[],
     firstName: [null, Validators.required],
     middleName: [null, Validators.required],
     lastName: [null, Validators.required],
@@ -178,9 +179,9 @@ export class UserComponent implements OnInit {
     this.submitted = true;
 
     if (this.userForm.value) {
-      if (this.userForm.value.user_id) {
+      if (this.userForm.value.userId) {
 
-        this.users[this.findIndexById(this.userForm.value.user_id)] = this.userForm.value.user_id;
+        this.users[this.findIndexById(this.userForm.value.userId)] = this.userForm.value.userId;
       //  this.users[this.findIndexById(this.userForm.u)]
         // this.messageService.add({
         //   severity: 'success',
@@ -195,7 +196,7 @@ export class UserComponent implements OnInit {
       } else {
        console.log('hjgjhgjhg');
         this.userSize = this.userSize + 1;
-        this.user.user_id = this.userSize.toString();
+        this.user.userId = this.userSize.toString();
         this.users.push(this.userForm.value);
 
         // this.programService.addProgram(this.program).subscribe((res) => {
@@ -235,7 +236,7 @@ export class UserComponent implements OnInit {
         header: 'Confirm',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
-            this.users = this.users.filter(val => val.user_id !== user.user_id);
+            this.users = this.users.filter(val => val.userId !== user.userId);
             //this.user = {};
             this.messageService.add({severity:'success', summary: 'Successful', detail: 'User Deleted', life: 3000});
         }
@@ -245,7 +246,7 @@ export class UserComponent implements OnInit {
   findIndexById(id: string): number {
     let index = -1;
     for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].user_id === id) {
+      if (this.users[i].userId === id) {
         index = i;
         break;
       }

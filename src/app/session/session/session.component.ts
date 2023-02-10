@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Inject} from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { Session } from '../session';
@@ -7,6 +7,8 @@ import { Batch } from 'src/app/batch/batch';
 import { BatchService } from 'src/app/batch/batch.service';
 import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
+import { InputNumber } from 'primeng/inputnumber';
+import { Dropdown, DropdownItem } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-session',
@@ -35,28 +37,26 @@ export class SessionComponent implements OnInit {
   batchList:Batch[];
   csId:string;
   userList:User[];
-  user_id:number;
+  userId:string;
   
 
 
 
   constructor(private sessionService: SessionService,
     private userService :UserService,
+    
      private batchService:BatchService,private messageService:MessageService,
     private confirmationService:ConfirmationService) { }
 
   ngOnInit() {
     this.getSessionList();
     this.batchService.getBatchList().subscribe(
-      batList=>{this.batchList=batList;}
-    
-    )
+      batList=>{this.batchList=batList;})
     this.userService.getUsers().subscribe(
       user1List=>{this.userList=user1List}
-
-    )
-    
+  )
   }
+
   
   openNew() {
     this.session={};
@@ -64,6 +64,7 @@ export class SessionComponent implements OnInit {
       this.sessionDialogue=true;  
   
     }
+    
     addSession() {
 
       this.submitted = true;
@@ -71,7 +72,7 @@ export class SessionComponent implements OnInit {
         const bat : any = this.session.batchId;
         this.session.batchId=bat.batchId;
         const user1 : any=this.session.classStaffId;
-        this.session.classStaffId=user1.user_id;
+        this.session.classStaffId=user1.userId;
         //edit class
         if (this.session.csId) {
           this.sessionList[this.findIndexById(this.session.csId)] = this.session;
@@ -82,16 +83,19 @@ export class SessionComponent implements OnInit {
             detail: 'Class Updated',
             life: 3000,
           });
+          this.session.batchId=bat;
+          this.session.classStaffId=user1;
           this.sessionService.editSession(this.session).
           subscribe((res)=>{
             console.log("Class is Updated")
+            return res;
           }) ;
         } else {
           //add a new class
           
           this.sessionList.push(this.session);  
           this.session.batchId=bat.batchId;
-          this.session.classStaffId=user1.user_id;
+          this.session.classStaffId=user1.userId;
           this.sessionService.addSession(this.session).subscribe((res)=>{});
   
           this.messageService.add({
@@ -127,10 +131,12 @@ export class SessionComponent implements OnInit {
       })
     }
     editSession(session: Session) {
+      
       this.session = { ...session};
+      this.session.classDate=new Date(this.session.classDate);
       this.sessionDialogue = true;
     }
-  
+    
   
   getMaxClassId(max: number){
    this.sessionList.forEach((character)=>{
