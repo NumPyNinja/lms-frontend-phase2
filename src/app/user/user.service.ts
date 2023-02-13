@@ -17,6 +17,11 @@ export class UserService {
     return this.httpClient.get<User[]>(this.url+"/users/roles");
   }
 
+  getAllUsers(): Observable<any> {
+    //return this.httpClient.get<any>('assets/Users.json')
+    return this.httpClient.get<User[]>(this.url+"/users");
+  }
+
   addUser(userData:FormData){
 
     return this.httpClient.post<any>(this.url+'/users/roleStatus',userData);
