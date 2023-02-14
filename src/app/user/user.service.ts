@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import {  Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import { User } from './user';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
 
   url: string = '/api';//'https://lms-admin-rest-service.herokuapp.com/programs';
 
@@ -21,6 +21,7 @@ export class UserService {
 
     return this.httpClient.post<any>(this.url+'/users/roleStatus',userData);
     
+
   }
 
   //addProgram(user: User): Observable<User> {

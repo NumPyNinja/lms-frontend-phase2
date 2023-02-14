@@ -184,12 +184,26 @@
 
             <div class="row">
               <div class="col">
+               <!-- <mat-form-field class="full-width">
+                  <input matInput placeholder="Visa status" formControlName="visaStatus">
+                  <mat-error *ngIf="userForm.controls['visaStatus'].hasError('required')">
+                    Visa status is <strong>required</strong>
                 <mat-form-field class="full-width">
                   <input matInput placeholder="User name" formControlName="userName">
                   <mat-error *ngIf="userForm.controls['userName'].hasError('required')">
                     User name is <strong>required</strong>
                   </mat-error>
+                </mat-form-field>-->
+                <mat-form-field appearance="fill">
+                  <mat-label>Visa Status</mat-label>
+                  <mat-select [formControl]="visaStatus">
+                    <mat-option *ngFor="let role of visaStatus" [value]="role">
+                      {{role}}
+                    </mat-option>
+                  </mat-select>
                 </mat-form-field>
+                
+
               </div>
               <div class="col">
                 <mat-form-field class="full-width">
