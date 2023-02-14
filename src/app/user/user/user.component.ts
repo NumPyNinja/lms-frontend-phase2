@@ -58,6 +58,11 @@ export class UserComponent implements OnInit {
     this.viewUserDialogue=false;
    this.submitted=false;
   }
+
+  openAssign(){
+
+  }
+  
   openNew() {
     this.user = {};
     this.submitted = false;
