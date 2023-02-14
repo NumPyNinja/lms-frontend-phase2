@@ -14,3 +14,16 @@ export interface Assignment {
     assignmentBatchId?: number,
     assignmentGraderId?: string
 }
+
+export interface AssignmentSelect {
+    assignmentName?: string;
+    assignmentId?: string;
+}
+
+export interface UploadedAssignment {
+    fileId?: number,
+    filePath?: string,
+    uploadDate?: Date,
+    uploadUser?: string,
+    assignmentId?: string
+}

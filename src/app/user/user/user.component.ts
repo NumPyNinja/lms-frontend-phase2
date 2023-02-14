@@ -21,12 +21,17 @@ export class UserComponent implements OnInit {
   submitted: boolean;
   userDialogue : boolean = false;
   viewUserDialogue:boolean=false;
+  //to save user profile picture
+  imageFile : any = File;
+  resumeFile : any = File;
 
 
   role = new FormControl();
   
   userRole:string[]=['Admin','Staff','Student'];
-  visaStatus:string[]=['H4 Applied', 'L2 Applied']
+
+  visaTypes: string[] = ['Not-Specified', 'NA', 'GC-EAD', 'H4-EAD', 'H4', 'H1B', 
+  'Canada-EAD', 'Indian-Citizen', 'US-Citizen', 'Canada-Citizen'];
 
 
   constructor(private userService: UserService,private fb: FormBuilder,private messageService: MessageService,
@@ -63,33 +68,36 @@ export class UserComponent implements OnInit {
 
   userForm = this.fb.group({
     userId:[],
+
     firstName: [null, Validators.required],
     middleName: [null, Validators.required],
     lastName: [null, Validators.required],
+
     emailAddress: [null, Validators.required],
-    phoneNumber: [null, Validators.required],
-    linkedUrl: [null, Validators.required],
+    userPhoneNumber: [null, Validators.required],
+    userLinkedinUrl: [null, Validators.required],
     program: [null, Validators.required],
-    ugProgram: [null, Validators.required],
-    pgProgram: [null, Validators.required],
-    skill: [null, Validators.required],
-    prevExp: [null, Validators.required],
+    userEduUg: [null, Validators.required],
+    userEduPg: [null, Validators.required],
+    userTimeZone:[null, Validators.required],
+  //  skill: [null, Validators.required],
+  //  prevExp: [null, Validators.required],
     experience: [null, Validators.required],
-    comments: [null, Validators.required],
+    usercomments: [null, Validators.required],
     fileType: [null, Validators.required],
     location:[],
     userRole: [null, Validators.required],
-    batch: [null, Validators.required],
+  //  batch: [null, Validators.required],
     visaStatus: [null, Validators.required],
     userName: [null, Validators.required],
     password: [null, Validators.required],
-    address: [null, Validators.required],
-    city: [null, Validators.required],
-    state: [null, Validators.required],
-    postalCode: [null, Validators.compose([
-      Validators.required, Validators.minLength(5), Validators.maxLength(5)])
-    ],
-    shippig: ['free', Validators.required]
+  //  address: [null, Validators.required],
+   // city: [null, Validators.required],
+    //state: [null, Validators.required],
+    //postalCode: [null, Validators.compose([
+   //   Validators.required, Validators.minLength(5), Validators.maxLength(5)])
+   // ],
+   // shippig: ['free', Validators.required]
 
   });
 
@@ -197,6 +205,7 @@ export class UserComponent implements OnInit {
        console.log('hjgjhgjhg');
         this.userSize = this.userSize + 1;
         this.user.userId = this.userSize.toString();
+
         this.users.push(this.userForm.value);
 
         // this.programService.addProgram(this.program).subscribe((res) => {
@@ -209,12 +218,34 @@ export class UserComponent implements OnInit {
         //   detail: 'Program Created',
         //   life: 3000,
         // });
-
       }
+        const userData = new FormData();
+        
+        userData.append("userInfo", JSON.stringify(this.userForm.value));
+        userData.append("imageFile", this.imageFile);
+        userData.append("resume",this.resumeFile);
+        
+        this.userService.addUser(userData).subscribe({
+          next:(res) => {
+            //alert("Patient added Successfully!");
+            this.userForm.reset();
+            //this.userDialogue.close("Patient's details saved.");
+            alert("User added successfully");
+          },
+         error:() =>
+          {
+          
+            alert("Error adding user details.");
+          }
+        })
+
+      //}
 
       this.users = [...this.users];
       this.userDialogue = false;
       this.user= {};
+
+      
     }
   }
   deleteSelectedUsers() {
@@ -232,7 +263,7 @@ export class UserComponent implements OnInit {
   deleteUser(user: User) {
     this.confirmationService.confirm({
         
-        message: 'Are you sure you want to delete ' + user.firstName + " " + user.middleName + " " + user.lastName +'?',
+       // message: 'Are you sure you want to delete ' + user.userFirstName? + " " + user.userMiddleName+ " " + user.lastName +'?',
         header: 'Confirm',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
@@ -252,6 +283,22 @@ export class UserComponent implements OnInit {
       }
     }
     return index;
+  }
+
+  saveImage(event:any){
+   
+    const imageFile =event.target.files[0];
+        console.log(imageFile);
+        this.imageFile = imageFile;
+
+  }
+
+  saveFile(event:any){
+   
+    const file =event.target.files[0];
+        console.log(file);
+        this.resumeFile = file;
+
   }
 
 }

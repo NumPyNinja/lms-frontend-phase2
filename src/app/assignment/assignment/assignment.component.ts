@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
-import { Assignment } from '../assignment';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Assignment, AssignmentSelect, UploadedAssignment } from '../assignment';
 import { AssignmentService } from '../assignment.service';
+import { Message} from 'primeng/api'
+
 
 @Component({
   selector: 'app-assignment',
@@ -19,18 +23,36 @@ export class AssignmentComponent implements OnInit {
   assigmentDialogue: boolean;
   selectedAssigment: Assignment[];
   submitted: boolean;
+  assignmentSelectList: AssignmentSelect[] = [];
+  selectedUploadAssignment: AssignmentSelect;
+  inputFilePath: string = "";
+  userId: string = "";
+  subscription: Subscription;
+  message1: Message[]=[];
 
   constructor(
     private assignmentService: AssignmentService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getAssignmentList();
+    this.subscription = this.authService.loggedInUserId.subscribe((res) => {
+      this.userId = res;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   private getMaxAssignmentId(max: number) {
     this.assignments.forEach((character) => {
+      let assignmentSelectOption: AssignmentSelect = {};
+      assignmentSelectOption.assignmentName = character.assignmentName;
+      assignmentSelectOption.assignmentId = character.assignmentId;
+      this.assignmentSelectList.push(assignmentSelectOption);
       const tempAssignmentId = Number(character.assignmentId);
 
       if (tempAssignmentId > max) {
@@ -103,7 +125,7 @@ export class AssignmentComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Assgigment Deleted',
+          detail: 'Assignment Deleted',
           life: 3000,
         });
       },
@@ -127,6 +149,33 @@ export class AssignmentComponent implements OnInit {
     return index;
   }
 
+  // upload Assigment button
+
+  displayUploadAssignmentDialog: boolean = false;
+  
+  showDialog() {
+    this.displayUploadAssignmentDialog = true;
+  }
+  
+  closePopup() {
+    this.displayUploadAssignmentDialog = false;
+  }
+
+  uploadAssignment() {
+    const uploadedAssignment: UploadedAssignment = {
+      filePath: this.inputFilePath,
+      assignmentId: this.selectedUploadAssignment.assignmentId,
+      uploadDate: new Date(),
+      uploadUser: this.userId
+    };
+    this.assignmentService.uploadAssignments(uploadedAssignment).subscribe((res) => {
+      this.inputFilePath = "";
+      this.selectedUploadAssignment = undefined;
+      this.closePopup();
+      this.message1 = [
+        {severity:'success',summary:'Filepath Uploaded Successfully',detail:''}];
+    });
+  }
 
 }
 

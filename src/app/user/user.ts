@@ -1,4 +1,7 @@
+import { UserRoleMaps } from "./user-role-maps";
+
 export interface User {
+
     userId?:string,
     firstName?: string;
     middleName?:string;
@@ -19,11 +22,19 @@ export interface User {
     batch?: string;
     program?: string;
     visaStatus?:string;
+    userComments?: string;
+    userVisaStatus?: string;
+    userFirstName?: string;
+    userMiddleName?:string;
+    userLastName?: string;
+    userPhoneNumber?: string;
+    userLocation?: string;
+    userLinkedinUrl?: string;
+    userEduUg?: string;
+    userEduPg?: string,
+    userTimeZone?: string,
+    userId?:string,
+    userRoleMaps?: UserRoleMaps;
     userName?: string;
     password?: string;
-    city?: string;
-    state?:string;
-    postalCode?: string;
-    shippig?: string;
- 
 }
