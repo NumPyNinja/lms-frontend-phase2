@@ -24,7 +24,7 @@ import { MatCardModule } from '@angular/material/card';
 import { UserComponent } from './user/user/user.component';
 import { AssignmentComponent } from './assignment/assignment/assignment.component';
 import { AttendanceComponent } from './attendance/attendance/attendance.component';
-import { SessionComponent } from './session/session/session.component';
+
 import {ListboxModule} from 'primeng/listbox';
 import { SignupComponent } from './login/sign-up/sign-up/sign-up.component';
 import { ClassComponent } from './class/class/class.component';
@@ -49,14 +49,12 @@ import {MessagesModule} from 'primeng/messages';
     UserComponent,
     AssignmentComponent,
     AttendanceComponent,
-    SessionComponent,
     SignupComponent,
     ClassComponent,
     ForgotPasswordComponent,
     VerificationCodeComponent
 
   ],
-
 
   imports: [
     BrowserModule,
