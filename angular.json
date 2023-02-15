@@ -84,6 +84,8 @@
           "proxyConfig": "proxy.config.json",
           "options": {
             "browserTarget": "lms-frontend-phase2:build"
+            
+         
           }
         },
         "test": {
@@ -126,6 +128,7 @@
           "configurations": {
             "production": {
               "devServerTarget": "lms-frontend-phase2:serve:production"
+              
             }
           }
         },
@@ -136,8 +139,5 @@
       }
     }
   },
-  "defaultProject": "lms-frontend-phase2",
-  "cli": {
-    "analytics": false
-  }
+  "defaultProject": "lms-frontend-phase2"
 }

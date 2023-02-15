@@ -29,10 +29,8 @@ export class UserComponent implements OnInit {
   role = new FormControl();
   
   userRole:string[]=['Admin','Staff','Student'];
-
   visaTypes: string[] = ['Not-Specified', 'NA', 'GC-EAD', 'H4-EAD', 'H4', 'H1B', 
   'Canada-EAD', 'Indian-Citizen', 'US-Citizen', 'Canada-Citizen'];
-
 
   constructor(private userService: UserService,private fb: FormBuilder,private messageService: MessageService,
     private confirmationService: ConfirmationService) { }
@@ -68,11 +66,9 @@ export class UserComponent implements OnInit {
 
   userForm = this.fb.group({
     userId:[],
-
-    firstName: [null, Validators.required],
-    middleName: [null, Validators.required],
-    lastName: [null, Validators.required],
-
+    userFirstName: [null, Validators.required],
+    userMiddleName: [null, Validators.required],
+    userLastName: [null, Validators.required],
     emailAddress: [null, Validators.required],
     userPhoneNumber: [null, Validators.required],
     userLinkedinUrl: [null, Validators.required],
@@ -205,8 +201,7 @@ export class UserComponent implements OnInit {
        console.log('hjgjhgjhg');
         this.userSize = this.userSize + 1;
         this.user.userId = this.userSize.toString();
-
-        this.users.push(this.userForm.value);
+        //this.users.push(this.userForm.value);
 
         // this.programService.addProgram(this.program).subscribe((res) => {
         // });
