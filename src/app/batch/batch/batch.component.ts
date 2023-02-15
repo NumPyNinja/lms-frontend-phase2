@@ -22,128 +22,50 @@ import { BatchService } from '../batch.service';
 export class BatchComponent implements OnInit {
 
   batchList: Batch[];
-
   batch: Batch;
-
   selectedBatches: Batch[];
-
   submitted: boolean;
-
   programSize: number;
   visibility: boolean = false;
   batchDialogue: boolean;
   programName  : string;
-
   status: string[] = ['ACTIVE', 'INACTIVE'];
-  // programList : Program[];
-
-
-   programList :Program[];
-   
-  
-
-
+  programList :Program[];
   constructor(
     private batchService: BatchService,
     private programService: ProgramService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
-  ) { 
-
-
-
-
-  }
+  ) { }
 
   ngOnInit() {
-
-
 this.programService.getPrograms().subscribe(list=>{
   this.programList = list;
 })
 
     this.batchService.getBatchList().subscribe(res => {
       this.batchList = res;
-
-      this.programSize = this.batchList.length;
-    })
-    //  this.getProgramList();
+     this.programSize = this.batchList.length; })
+     
+      
   }
-
-
-
-
   openNew() {
     this.batch = {};
     this.submitted = false;
     this.batchDialogue = true;
   }
-
-  deleteSelectedBatches() {
-    this.confirmationService.confirm({
-
-      message: 'Are you sure you want to delete the selected batches?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.batchList = this.batchList.filter(
-          (val) => !this.selectedBatches.includes(val)
-        );
-        this.selectedBatches = null;
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Batches Deleted',
-          life: 3000,
-        });
-      },
-    });
-  }
-
-  editBatch(batch: Batch) {
-    this.programName =batch.programName;
-    this.batch = { ...batch };
-    this.batchDialogue = true;
-  }
-
-
-  deleteBatch(batch: Batch) {
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + batch.batchName + '?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.batchList = this.batchList.filter((val) => val.batchId!== batch.batchId);
-        
-        this.batchService.deleteBatch(batch).subscribe(response => {
-          console.log('a batch is deleted');
-        })
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'batch Deleted',
-          life: 3000,
-        });
-      },
-    });
-  }
-
   hideDialog() {
     this.batchDialogue = false;
     this.submitted = false;
   }
-
-  saveBatch(): void {
-
- 
-    this.submitted = true;
+ saveBatch(): void {
+   this.submitted = true;
 
     if (this.batch.batchName.trim()) {
 
        const pro :any  = this.batch.programName;
-
+       const pro1:any =this.batch.programId;
        this.batch.programId=pro.programId;
-
        this.batch.programName = pro.programName;
 
 
@@ -157,7 +79,8 @@ this.programService.getPrograms().subscribe(list=>{
           detail: 'batch Updated',
           life: 3000,
         });
-
+        this.batch.programName=pro;
+        this.batch.programId=pro1;
         this.batchService.updateBatch(this.batch).subscribe((res) => {
           console.log('a batch is updated')
         });
@@ -167,17 +90,10 @@ this.programService.getPrograms().subscribe(list=>{
     
       // add a new batch
         this.programSize = this.programSize + 1;
-      //  this.batch.batchId = this.programSize.toString();
         this.batchList.push(this.batch);
-        
-        //const pro  = this.batch.programId;
-        //this.batch.programId=pro.programId;
         this.batch.programName = pro.programName;
-
         this.batchService.addBatch(this.batch).subscribe((res) => {
         });
-
-
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
@@ -214,13 +130,52 @@ this.programService.getPrograms().subscribe(list=>{
     return max;
   }
 
-  private getProgramList() {
-    this.visibility = true;
-    //  this.programService.getPrograms().subscribe((res) => {
-    //   this.programs = res;
-    //   this.programSize = this.getMaxProgramId(0);
-    //   this.visibility = false;
-    // });
+  editBatch(batch: Batch) {
+    // this.programName =pro;
+     this.batch = { ...batch };
+     this.batchDialogue = true;
+   }
+  deleteBatch(batch: Batch) {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete ' + batch.batchName + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.batchList = this.batchList.filter((val) => val.batchId!== batch.batchId);
+        
+        this.batchService.deleteBatch(batch).subscribe(response => {
+          console.log('a batch is deleted');
+        })
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'batch Deleted',
+          life: 3000,
+        });
+      },
+    });
   }
+
+  deleteSelectedBatches() {
+    this.confirmationService.confirm({
+
+      message: 'Are you sure you want to delete the selected batches?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.batchList = this.batchList.filter(
+          (val) => !this.selectedBatches.includes(val)
+        );
+        this.selectedBatches = null;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Batches Deleted',
+          life: 3000,
+        });
+      },
+    });
+  }
+
 }
 
