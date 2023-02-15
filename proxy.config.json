@@ -2,7 +2,7 @@
   "/api": {
     "target":"http://lms-backend-service.herokuapp.com/lms/",
     "pathRewrite": {
-      "^/api": ""
+      "^/api": "/lms"
     },
     "changeOrigin": true,
     "logLevel": "debug",

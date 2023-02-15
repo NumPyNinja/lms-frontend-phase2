@@ -14,10 +14,10 @@
                 <div>
                     <span class="p-input-icon-left">
                         <i class="pi pi-search"></i>
-                        <input pInputText type="text" id ="filterGlobalId" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                            placeholder="Search..." />
+                        <input pInputText type="text" id="filterGlobalId"
+                            (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
                     </span>
-                </div> 
+                </div>
                 <div>
                     <button pButton pRipple id="new" label="A New Attendance" icon="pi pi-plus"
                         class="p-button-rounded p-button-success" (click)="openNew()"></button>
@@ -32,8 +32,8 @@
             </div>
 
             <p-table #dt responsiveLayout="stack" [value]="attendances" [rows]="5" [paginator]="true"
-                [globalFilterFields]="['attId','csId','studentId']"
-                [(selection)]="selectedAttendances" [rowHover]="true" dataKey="attId"
+                [globalFilterFields]="['attId','csId','studentId']" [(selection)]="selectedAttendances"
+                [rowHover]="true" dataKey="attId"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                 [showCurrentPageReport]="true">
 
@@ -55,7 +55,7 @@
                         <th pSortableColumn="attendance">Present <p-sortIcon field="Comments">
                             </p-sortIcon>
                         </th>
-                       
+
                         <th style="width: 15%"> Edit / Delete
                         </th>
                     </tr>
@@ -70,14 +70,14 @@
                         <td>{{attendance.csId}}</td>
                         <td>{{attendance.studentId}}</td>
                         <td>{{attendance.attendance}}</td>
-                        
+
                         <td>
                             <div class="action">
                                 <span>
                                     <button pButton pRipple icon="pi pi-pencil"
                                         class="p-button-rounded p-button-success"
                                         (click)="editAttendance(attendance)"></button>
-                                </span>&nbsp;&nbsp;
+                                </span>
                                 <span>
                                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
                                         (click)="deleteAttendance(attendance)"></button>
@@ -96,61 +96,40 @@
     </mat-card>
 </div>
 
-<p-dialog [(visible)]="attendanceDialogue" [style]="{width: '550px'}"
- header="Attendance Details" [modal]="true"
+<p-dialog [(visible)]="attendanceDialogue" [style]="{width: '550px'}" header="Attendance Details" [modal]="true"
     styleClass="p-fluid">
     <ng-template pTemplate="content">
         <div class="p-fluid p-grid p-formgrid">
 
-        <div class="p-field">
-            <label for="programName">Program Name</label>
-            <p-dropdown [options]="programList"  id="programName" [(ngModel)]="attendance.programName" placeholder="Select a Program name"
-                editable="true" optionLabel="programName" [showClear]="true" (onChange)="onChange($event)"></p-dropdown>
+            <div class="p-field">
+                <label for="programName">Program Name</label>
+                <p-dropdown [options]="programList" id="programName" [(ngModel)]="attendance.programName"
+                    placeholder="Select a Program name" editable="true" optionLabel="programName" [showClear]="true">
+                </p-dropdown>
+            </div>
+            <div class="p-field">
+                <label for="class">Class Name</label>
+                <p-multiSelect id="classNameId" [options]="classList" [(ngModel)]="selectedClasses"
+                    defaultLabel="Select Class Name" optionLabel="classTopic" display="chip"></p-multiSelect>
+            </div>
+            <div class="p-field">
+                <label for="studentName">Student Name</label>
+                <p-multiSelect id="studentName" [options]="users" [(ngModel)]="selectedStudents"
+                    defaultLabel="Select students" optionLabel="userFirstName" display="chip"></p-multiSelect>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="icon">Attendance Due Date</label>
+                <p-calendar [(ngModel)]="selectedDate" [showIcon]="true" inputId="icon" id="calendarDueDate"
+                    dateFormat="dd/mm/yy" [style]="{ 'position': 'relative', 'z-index': '80'}"></p-calendar>
+            </div>
         </div>
-
-        <div class="p-field">
-            <label for="class">Class Name</label>
-            <p-multiSelect
-            id="classNameId"
-            [options]="classList"
-            [(ngModel)]="selectedClass"
-            defaultLabel="Select Class Name"
-            optionLabel="classTopic" 
-            display="chip"
-          ></p-multiSelect>
-       
-        </div>
-   
-        <div class="p-field">
-            <label for="programName">Student Name</label>
-            <p-multiSelect
-            id="studentName"
-            [options]="users"
-            [(ngModel)]="selectedCities"
-            defaultLabel="Select  students"
-            optionLabel="firstName"
-            display="chip"
-          ></p-multiSelect>
-          
-
-        </div>
-
-
-        <div class="p-field p-col-12 p-md-4">
-            <label for="icon">Attendance Due Date</label>
-            <p-calendar [showIcon]="true" inputId="icon"  id ="calendarDueDate" dateFormat="dd/mm/yy"
-                [style]="{ 'position': 'relative', 'z-index': '80'}"></p-calendar>
-        </div>
-
-
-      
-</div>
     </ng-template>
+
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-rounded p-button-danger"
             (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save"  id="saveAttendance" icon="pi pi-check" class="p-button-rounded p-button-success"
-            (click)="saveAttendance()"></button>
+        <button pButton pRipple label="Save" id="saveAttendance" icon="pi pi-check"
+            class="p-button-rounded p-button-success" (click)="saveAttendance()"></button>
     </ng-template>
 </p-dialog>
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

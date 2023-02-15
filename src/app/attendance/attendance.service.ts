@@ -16,15 +16,15 @@ export class AttendanceService {
   }
 
   addAttendance(attendance: Attendance): Observable<Attendance> {
-    return this.httpClient.post<Attendance>(this.url + "/batches", attendance);
+    return this.httpClient.post<Attendance>(this.url + "/attendance", attendance);
   }
 
   updateAttendance(attendance: Attendance) {
-    return this.httpClient.put<Attendance>(this.url + "/batches/" + attendance.attId, attendance);
+    return this.httpClient.put<Attendance>(this.url + "/attendance/" + attendance.attId, attendance);
   }
 
   delete(attendance: Attendance) {
-    return this.httpClient.delete<Attendance>(this.url + "/batches/" + attendance.attId);
+    return this.httpClient.delete<string>(this.url + "/attendance/" + attendance.attId);
   }
 
 }

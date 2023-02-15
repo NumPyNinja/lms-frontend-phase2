@@ -32,15 +32,15 @@ export class BatchComponent implements OnInit {
   programSize: number;
   visibility: boolean = false;
   batchDialogue: boolean;
-  programName  : string;
+  programName: string;
 
   status: string[] = ['ACTIVE', 'INACTIVE'];
   // programList : Program[];
 
 
-   programList :Program[];
-   
-  
+  programList: Program[];
+
+
 
 
   constructor(
@@ -48,7 +48,7 @@ export class BatchComponent implements OnInit {
     private programService: ProgramService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
-  ) { 
+  ) {
 
 
 
@@ -58,9 +58,9 @@ export class BatchComponent implements OnInit {
   ngOnInit() {
 
 
-this.programService.getPrograms().subscribe(list=>{
-  this.programList = list;
-})
+    this.programService.getPrograms().subscribe(list => {
+      this.programList = list;
+    })
 
     this.batchService.getBatchList().subscribe(res => {
       this.batchList = res;
@@ -101,7 +101,7 @@ this.programService.getPrograms().subscribe(list=>{
   }
 
   editBatch(batch: Batch) {
-    this.programName =batch.programName;
+    this.programName = batch.programName;
     this.batch = { ...batch };
     this.batchDialogue = true;
   }
@@ -113,8 +113,8 @@ this.programService.getPrograms().subscribe(list=>{
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.batchList = this.batchList.filter((val) => val.batchId!== batch.batchId);
-        
+        this.batchList = this.batchList.filter((val) => val.batchId !== batch.batchId);
+
         this.batchService.deleteBatch(batch).subscribe(response => {
           console.log('a batch is deleted');
         })
@@ -135,21 +135,21 @@ this.programService.getPrograms().subscribe(list=>{
 
   saveBatch(): void {
 
- 
+
     this.submitted = true;
 
     if (this.batch.batchName.trim()) {
 
-       const pro :any  = this.batch.programName;
+      const pro: any = this.batch.programName;
 
-       this.batch.programId=pro.programId;
+      this.batch.programId = pro.programId;
 
-       this.batch.programName = pro.programName;
+      this.batch.programName = pro.programName;
 
 
       //edit batch
       if (this.batch.batchId) {
-        this.batchList[this.findIndexById(this.batch.batchId )] = this.batch;
+        this.batchList[this.findIndexById(this.batch.batchId)] = this.batch;
 
         this.messageService.add({
           severity: 'success',
@@ -164,12 +164,12 @@ this.programService.getPrograms().subscribe(list=>{
 
       } else {
 
-    
-      // add a new batch
+
+        // add a new batch
         this.programSize = this.programSize + 1;
-      //  this.batch.batchId = this.programSize.toString();
+        //  this.batch.batchId = this.programSize.toString();
         this.batchList.push(this.batch);
-        
+
         //const pro  = this.batch.programId;
         //this.batch.programId=pro.programId;
         this.batch.programName = pro.programName;
@@ -195,7 +195,7 @@ this.programService.getPrograms().subscribe(list=>{
   findIndexById(id: string): number {
     let index = -1;
     for (let i = 0; i < this.batchList.length; i++) {
-      if (this.batchList[i].batchId=== id) {
+      if (this.batchList[i].batchId === id) {
         index = i;
         break;
       }

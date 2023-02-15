@@ -6,6 +6,8 @@ import { Class } from 'src/app/class/class';
 import { ClassService } from 'src/app/class/class.service';
 import { Program } from 'src/app/program/program';
 import { ProgramService } from 'src/app/program/program.service';
+import { User } from 'src/app/user/user';
+import { UserService } from 'src/app/user/user.service';
 import { Attendance } from '../attendance';
 import { AttendanceService } from '../attendance.service';
 
@@ -30,21 +32,18 @@ export class AttendanceComponent implements OnInit {
   programList: Program[];
   selectedProgram: string;
   classList: Class[];
-  selectedClass: string[];
-
+  selectedClasses: Class[];
+  selectedStudents: User[];
+  selectedDate: Date;
+  users: User[];
 
   constructor(
     private attendanceService: AttendanceService,
-    //private attendanceService: AttendanceService,
     private messageService: MessageService,
     private programService: ProgramService,
     private confirmationService: ConfirmationService,
-    private classService: ClassService) {
-
-    // this.attendanceService.getProgramUserDetails().subscribe(res => {
-    //   console.log(res);
-    // })
-
+    private classService: ClassService,
+    private userService: UserService) {
     this.programService.getPrograms().subscribe(list => {
       this.programList = list;
     })
@@ -82,48 +81,68 @@ export class AttendanceComponent implements OnInit {
     this.attendance = {};
     this.submitted = false;
     this.attendanceDialogue = true;
-   await this.classService.getClassList().subscribe(res => {
-     console.log('kjhkhjkhjkhkjhk'+res)
+    await this.classService.getClassList().subscribe(res => {
       this.classList = res;
-
     })
+    await this.userService.getAllUsers().subscribe(res => {
+      this.users = res;
+    })
+
   }
 
-  //save an assigment
+  hideDialog() {
+    this.attendanceDialogue = false;
+    this.submitted = false;
+  }
+
+  //save an attendance 
   saveAttendance() {
 
     this.submitted = true;
-    if (this.attendance.attId.trim()) {
-      if (this.attendance.attId) {
-        this.attendances[this.findIndexById(this.attendance.attId)] = this.attendance;
+    if (this.attendance.attId) {
+      const attId = this.attendance.attId.trim();
+      this.attendances[this.findIndexById(attId)] = this.attendance;
 
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Attendance Updated',
-          life: 3000,
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Successful',
+        detail: 'Attendance Updated',
+        life: 3000,
+      });
+
+      this.attendanceService.getAttendanceList().subscribe((res) => {
+        console.log('a attendance is save')
+      });
+
+    } else {
+      let newAttendanceCount: number = 1;
+      this.selectedClasses.forEach((selectedClass) => {
+        this.selectedStudents.forEach((selectedStudent) => {
+          let attendance: Attendance = {};
+          attendance.csId = selectedClass.csId.toString();
+          attendance.studentId = selectedStudent.userId;
+          attendance.attendance = 'Present';
+          this.attendanceService.addAttendance(attendance).subscribe((res) => {
+            newAttendanceCount = newAttendanceCount + 1;
+          }, err => {
+            this.messageService.add({
+              severity: 'failure',
+              summary: 'Failed',
+              detail: 'Attendance creation failed',
+              life: 3000,
+            });
+          });
         });
-
-        ;
-      } else {
-        this.attendanceSize = this.attendanceSize + 1;
-        // this.attendance.attendanceId = this.attendanceSize; //TODO need to be checked
-        this.attendances.push(this.attendance);
-
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Attendance Created',
-          life: 3000,
-        });
-
-      }
-      this.attendances = [...this.attendances];
-      this.attendanceDialogue = false;
-      this.attendance = {};
-
+      })
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Successful',
+        detail: newAttendanceCount + ' new attendances created',
+        life: 3000,
+      });
+      this.getAttendanceList();
     }
-
+    this.attendanceDialogue = false;
   }
 
   deleteAttendance(attendance: Attendance) {
@@ -134,10 +153,13 @@ export class AttendanceComponent implements OnInit {
       accept: () => {
         this.attendances = this.attendances.filter((val) => val.attId !== attendance.attId);
 
+        this.attendanceService.delete(attendance).subscribe(response => {
+          
+        })
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Attendance Deleted',
+          detail: 'Attendance delete',
           life: 3000,
         });
       },
@@ -160,17 +182,4 @@ export class AttendanceComponent implements OnInit {
     }
     return index;
   }
-
-  onChange(event: any) {
-    console.log('Test' + event);
-    this.users = [];
-    // this.attendanceService.getProgramUserDetails().subscribe(res => {
-    //   res.forEach(item => {
-    //     if (item.programId == event.value.programId) {
-    //       this.users = item.users;
-    //     }
-    //   })
-    // })
-  }
-  users: any;
 }
