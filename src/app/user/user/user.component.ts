@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import{User}from '../user';
 import { UserService } from '../user.service';
-
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 
@@ -24,10 +23,7 @@ export class UserComponent implements OnInit {
   //to save user profile picture
   imageFile : any = File;
   resumeFile : any = File;
-
-
   role = new FormControl();
-  
   userRole:string[]=['Admin','Staff','Student'];
   visaTypes: string[] = ['Not-Specified', 'NA', 'GC-EAD', 'H4-EAD', 'H4', 'H1B', 
   'Canada-EAD', 'Indian-Citizen', 'US-Citizen', 'Canada-Citizen'];
