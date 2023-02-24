@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Assignment, AssignmentSelect, UploadedAssignment } from '../assignment';
 import { AssignmentService } from '../assignment.service';
-import { Message} from 'primeng/api'
+import { Message } from 'primeng/api'
 
 
 @Component({
@@ -28,7 +28,7 @@ export class AssignmentComponent implements OnInit {
   inputFilePath: string = "";
   userId: string = "";
   subscription: Subscription;
-  message1: Message[]=[];
+  message1: Message[] = [];
 
   constructor(
     private assignmentService: AssignmentService,
@@ -79,39 +79,41 @@ export class AssignmentComponent implements OnInit {
 
   //save an assigment
   saveAssignment() {
-
     this.submitted = true;
     if (this.assignment.assignmentName.trim()) {
-      if (this.assignment.assignmentBatchId) {
-        this.assignments[this.findIndexById(this.assignment.assignmentId)] = this.assignment;
-
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Assignment Updated',
-          life: 3000,
+      if (this.assignment.assignmentId) {
+        this.assignmentService.updateAssignment(this.assignment).subscribe((res) => {
+          this.assignmentService.getAssignments().subscribe((res) => {
+            this.assignments = res;
+          });
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Successful',
+            detail: this.assignment.assignmentName + ' Updated',
+            life: 3000,
+          });
         });
-
-        ;
       } else {
         this.assignmentSize = this.assignmentSize + 1;
-        this.assignment.assignmentBatchId = this.assignmentSize;
-        this.assignments.push(this.assignment);
-
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Assignment Created',
-          life: 3000,
+        this.assignment.batchId = this.assignmentSize;
+        this.assignment.createdBy = 'U02';
+        this.assignment.graderId = 'U02';
+        this.assignmentService.saveAssignment(this.assignment).subscribe((res) => {
+          this.assignmentService.getAssignments().subscribe((res) => {
+            this.assignments = res;
+          });
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Successful',
+            detail: 'Assignment created',
+            life: 2000,
+          });
         });
-
       }
       this.assignments = [...this.assignments];
       this.assigmentDialogue = false;
       this.assignment = {};
-
     }
-
   }
 
   deleteAssigment(assigment: Assignment) {
@@ -122,11 +124,13 @@ export class AssignmentComponent implements OnInit {
       accept: () => {
         this.assignments = this.assignments.filter((val) => val.assignmentId !== assigment.assignmentId);
 
+        this.assignmentService.delete(assigment).subscribe(response => {
+        })
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
           detail: 'Assignment Deleted',
-          life: 3000,
+          life: 2000,
         });
       },
     });
@@ -152,11 +156,11 @@ export class AssignmentComponent implements OnInit {
   // upload Assigment button
 
   displayUploadAssignmentDialog: boolean = false;
-  
+
   showDialog() {
     this.displayUploadAssignmentDialog = true;
   }
-  
+
   closePopup() {
     this.displayUploadAssignmentDialog = false;
   }
@@ -173,7 +177,7 @@ export class AssignmentComponent implements OnInit {
       this.selectedUploadAssignment = undefined;
       this.closePopup();
       this.message1 = [
-        {severity:'success',summary:'Filepath Uploaded Successfully',detail:''}];
+        { severity: 'success', summary: 'Filepath Uploaded Successfully', detail: '' }];
     });
   }
 
