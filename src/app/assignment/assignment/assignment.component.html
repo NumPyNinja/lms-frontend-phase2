@@ -92,7 +92,7 @@
                         </td>
                         <td>{{assignment.assignmentName}}</td>
                         <td>{{assignment.assignmentDescription}}</td>
-                        <td>{{assignment.dueDate}}</td>
+                        <td>{{assignment.dueDate|date:'shortDate'}}</td>
                         <td> <button pButton pRipple type="button" label="Manage"
                                 class="p-button-raised p-button-text p-button-plain"></button></td>
                         <td>
@@ -136,8 +136,7 @@
 
         <div class="p-field">
             <label for="programDescription">Assignment Grade</label>
-            <input type="text" id="graderId" pInputText [(ngModel)]="assignment.graderId" required
-                rows="3" cols="20" />
+            <input type="text" id="graderId" pInputText [(ngModel)]="assignment.graderId" required rows="3" cols="20" />
         </div>
 
         <!-- <div class="p-field">
