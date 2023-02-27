@@ -57,7 +57,7 @@
                 </mat-spinner>
             </div>
             <p-table #dt responsiveLayout="stack" [value]="assignments" [rows]="5" [paginator]="true"
-                [globalFilterFields]="['assignmentName','assignmentDescription','assignmentComments']"
+                [globalFilterFields]="['assignmentName','assignmentDescription','comments']"
                 [(selection)]="selectedAssignments" [rowHover]="true" dataKey="assignmentId"
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                 [showCurrentPageReport]="true">
@@ -74,10 +74,10 @@
                             <p-sortIcon field="description">
                             </p-sortIcon>
                         </th>
-                        <th style="width: 20%" pSortableColumn="assignmentComments">Assignment Due Date <p-sortIcon
+                        <th style="width: 20%" pSortableColumn="comments">Assignment Due Date <p-sortIcon
                                 field="Comments"></p-sortIcon>
                         </th>
-                        <th pSortableColumn="assignmentGraderId">Assignment Grade <p-sortIcon field="Comments">
+                        <th pSortableColumn="graderId">Assignment Grade <p-sortIcon field="Comments">
                             </p-sortIcon>
                         </th>
                         <th style="width: 15%"> Edit / Delete
@@ -92,7 +92,7 @@
                         </td>
                         <td>{{assignment.assignmentName}}</td>
                         <td>{{assignment.assignmentDescription}}</td>
-                        <td>{{assignment.assignmentDueDate}}</td>
+                        <td>{{assignment.dueDate|date:'shortDate'}}</td>
                         <td> <button pButton pRipple type="button" label="Manage"
                                 class="p-button-raised p-button-text p-button-plain"></button></td>
                         <td>
@@ -136,19 +136,18 @@
 
         <div class="p-field">
             <label for="programDescription">Assignment Grade</label>
-            <input type="text" id="assignmentGraderId" pInputText [(ngModel)]="assignment.assignmentGraderId" required
-                rows="3" cols="20" />
+            <input type="text" id="graderId" pInputText [(ngModel)]="assignment.graderId" required rows="3" cols="20" />
         </div>
 
         <!-- <div class="p-field">
             <label for="programDescription">Assignment Due Date</label>
-            <input type="text" id="assignmentDueDate" pInputText [(ngModel)]="assignment.assignmentDueDate" required
+            <input type="text" id="dueDate" pInputText [(ngModel)]="assignment.dueDate" required
                 rows="3" cols="20" />
         </div> -->
 
         <div class="p-field">
             <label for="icon">Assignment Due Date</label>
-            <p-calendar [(ngModel)]="assignment.assignmentDueDate" [showIcon]="true" inputId="icon"
+            <p-calendar [(ngModel)]="assignment.dueDate" [showIcon]="true" inputId="icon"
                 [style]="{ 'position': 'relative', 'z-index': '100' }"></p-calendar>
         </div>
     </ng-template>

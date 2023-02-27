@@ -3,16 +3,16 @@ export interface Assignment {
     assignmentId?: string,
     assignmentName?: string,
     assignmentDescription?: string,
-    assignmentComments?: string,
-    assignmentDueDate?: Date,
-    assignmentPathAttach1?: string,
-    assignmentPathAttach2?: string,
-    assignmentPathAttach3?: string,
-    assignmentPathAttach4?: string,
-    assignmentPathAttach5?: string,
-    assignmentCreatedBy?: string,
-    assignmentBatchId?: number,
-    assignmentGraderId?: string
+    comments?: string,
+    dueDate?: Date,
+    pathAttachment1?: string,
+    pathAttachment2?: string,
+    pathAttachment3?: string,
+    pathAttachment4?: string,
+    pathAttachment5?: string,
+    createdBy?: string,
+    batchId?: number,
+    graderId?: string
 }
 
 export interface AssignmentSelect {
