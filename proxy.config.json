@@ -1,6 +1,5 @@
 {
   "/api": {
- GetAddAllAssigment
     "target":"http://localhost:1234/lms/",
     "pathRewrite": {
       "^/api": ""
