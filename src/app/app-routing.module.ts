@@ -9,7 +9,7 @@ import { AssignmentComponent } from './assignment/assignment/assignment.componen
 import { AttendanceComponent } from './attendance/attendance/attendance.component';
 import { SignupComponent } from './login/sign-up/sign-up/sign-up.component'; 
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
-
+import { SessionComponent } from './session/session/session.component';
 
 
 const routes: Routes = [
@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
   { path: 'assignment', component: AssignmentComponent, canActivate: [AuthGuard] },
   { path: 'attendance', component: AttendanceComponent, canActivate: [AuthGuard] },
+  { path: 'session', component: SessionComponent,canActivate:[AuthGuard]},
   { path: 'forgot-password', component:ForgotPasswordComponent},
   { path: '**', redirectTo: '' },
 ];
