@@ -88,8 +88,12 @@ export class SessionComponent implements OnInit {
           });
       } else {
         //add a new class
-        this.session.classStaffId = user1.userId;
-        this.sessionService.addSession(this.session).subscribe((res) => { });
+          
+          this.sessionList.push(this.session);  
+          this.session.batchId=bat.batchId;
+          this.session.classStaffId=user1.userId;
+          this.sessionService.addSession(this.session).subscribe((res)=>{});
+  
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
