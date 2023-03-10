@@ -1,4 +1,4 @@
-import { Component, OnInit ,Inject} from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { Session } from '../session';
@@ -26,129 +26,124 @@ import { Dropdown, DropdownItem } from 'primeng/dropdown';
 
 })
 export class SessionComponent implements OnInit {
-  sessionDialogue:boolean;
-  sessionList:Session[];
+  sessionDialogue: boolean;
+  sessionList: Session[];
   session: Session;
-  selectedSessions:Session[];
-  submitted:boolean;
-  sessionSize:number;
-  visibility: boolean =false;
-  batchId:number;
-  batchList:Batch[];
-  csId:string;
-  userList:User[];
-  userId:string;
+  selectedSessions: Session[];
+  submitted: boolean;
+  sessionSize: number;
+  visibility: boolean = false;
+  batchId: number;
+  batchList: Batch[];
+  csId: string;
+  userList: User[];
+  userId: string;
   constructor(private sessionService: SessionService,
-    private userService :UserService,
-    private batchService:BatchService,private messageService:MessageService,
-    private confirmationService:ConfirmationService) { }
+    private userService: UserService,
+    private batchService: BatchService, private messageService: MessageService,
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
     this.getSessionList();
     this.batchService.getBatchList().subscribe(
-      batList=>{this.batchList=batList;})
+      batList => { this.batchList = batList; })
     this.userService.getAllUsers().subscribe(
-      user1List=>{this.userList=user1List}
-  )
+      user1List => { this.userList = user1List }
+    )
+  }
+  openNew() {
+    this.session = {};
+    this.submitted = false;
+    this.sessionDialogue = true;
+
+  }
+  hideDialog() {
+    this.sessionDialogue = false;
+    this.submitted = false;
   }
 
-  
-  openNew() {
-    this.session={};
-      this.submitted=false;
-      this.sessionDialogue=true;  
-  
-    }
-    hideDialog() {
-      this.sessionDialogue = false;
-      this.submitted = false;
-    }
-    
-    addSession() {
+  addSession() {
 
-      this.submitted = true;
-      if (this.session.classTopic.trim()) {
-        const bat : any = this.session.batchId;
-        this.session.batchId=bat.batchId;
-        const user1 : any=this.session.classStaffId;
-        this.session.classStaffId=user1.userId;
-        //edit class
-        if (this.session.csId) {
-          this.sessionList[this.findIndexById(this.session.csId)] = this.session;
-  
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Successful',
-            detail: 'Class Updated',
-            life: 3000,
-          });
-          this.session.batchId=bat;
-          this.session.classStaffId=user1;
-          this.sessionService.editSession(this.session).
-          subscribe((res)=>{
+    this.submitted = true;
+    if (this.session.classTopic.trim()) {
+      const bat: any = this.session.batchId;
+      this.session.batchId = bat.batchId;
+      const user1: any = this.session.classStaffId;
+      this.session.classStaffId = user1.userId;
+      //edit class
+      if (this.session.csId) {
+        this.sessionList[this.findIndexById(this.session.csId)] = this.session;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Class Updated',
+          life: 3000,
+        });
+        this.session.batchId = bat;
+        this.session.classStaffId = user1;
+        this.sessionService.editSession(this.session).
+          subscribe((res) => {
             console.log("Class is Updated")
             return res;
-          }) ;
-        } else {
-          //add a new class
-          
-          this.sessionList.push(this.session);  
-          this.session.batchId=bat.batchId;
-          this.session.classStaffId=user1.userId;
-          this.sessionService.addSession(this.session).subscribe((res)=>{});
-  
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Successful',
-            detail: 'Class Created',
-            life: 3000,
           });
-  
+      } else {
+        //add a new class
+        this.session.classStaffId = user1.userId;
+        this.sessionService.addSession(this.session).subscribe((res) => { });
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Class Created',
+          life: 3000,
+        });
+        this.getSessionList();
+      } (error) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Failed',
+          detail: error,
+          life: 3000,
+        });
+      }
+      this.sessionList = [...this.sessionList];
+      this.sessionDialogue = false;
+      this.session = {};
+    }
+  }
+  findIndexById(id: number): number {
+    let index = -1;
+    if (this.sessionList !== undefined)
+      for (let i = 0; i < this.sessionList.length; i++) {
+        if (this.sessionList[i].csId === id) {
+          index = i;
+          break;
         }
-        this.sessionList = [...this.sessionList];
-        this.sessionDialogue = false;
-        this.session = {};
-  
       }
-  
-    }
-    findIndexById(id: number) :number{
-    let index =-1;
-    if(this.sessionList!==undefined)
-    for(let i =0;i<this.sessionList.length;i++){
-      if(this.sessionList[i].csId===id){
-        index=i;
-        break;
-      }
-    }
     return index;
   }
-    private getSessionList() {
-      this.sessionService.getSessions().subscribe(res=>{
-        this.sessionList=res;
-        this.visibility=false;
-      })
-    }
-    editSession(session: Session) {
-      
-      this.session = { ...session};
-      this.session.classDate=new Date(this.session.classDate);
-      this.sessionDialogue = true;
-    }
-    
-  
-  getMaxClassId(max: number){
-   this.sessionList.forEach((character)=>{
-      const tempSessionId =Number(character.csId);
-      if(tempSessionId>max){
-        max=tempSessionId;
+  private getSessionList() {
+    this.sessionService.getSessions().subscribe(res => {
+      this.sessionList = res;
+      this.visibility = false;
+    })
+  }
+  editSession(session: Session) {
+    this.session = { ...session };
+    this.session.classDate = new Date(this.session.classDate);
+    this.sessionDialogue = true;
+  }
+
+  getMaxClassId(max: number) {
+    this.sessionList.forEach((character) => {
+      const tempSessionId = Number(character.csId);
+      if (tempSessionId > max) {
+        max = tempSessionId;
       }
     });
-  
     return max;
-    
+
   }
-  deleteSelectedClass(){
+  deleteSelectedClass() {
     this.confirmationService.confirm({
 
       message: 'Are you sure you want to delete the selected classes?',
@@ -158,7 +153,6 @@ export class SessionComponent implements OnInit {
         this.sessionList = this.sessionList.filter(
           (val) => !this.selectedSessions.includes(val)
         );
-        
         this.selectedSessions = null;
         this.messageService.add({
           severity: 'success',
@@ -168,7 +162,7 @@ export class SessionComponent implements OnInit {
         });
       },
     });
-  
+
 
   }
   deleteSession(session: Session) {
@@ -177,8 +171,8 @@ export class SessionComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.sessionList= this.sessionList.filter((val) => val.csId !== session.csId);
-        this.sessionService.deleteSession(session).subscribe(res=>{
+        this.sessionList = this.sessionList.filter((val) => val.csId !== session.csId);
+        this.sessionService.deleteSession(session).subscribe(res => {
           console.log('Class is Deleted');
         })
         this.messageService.add({

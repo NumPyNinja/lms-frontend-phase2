@@ -123,7 +123,15 @@
 <p-dialog [(visible)]="assigmentDialogue" [style]="{width: '550px'}" header="Assigment Details" [modal]="true"
     styleClass="p-fluid">
     <ng-template pTemplate="content">
+        <label for="programName">Program Name</label>
+        <p-dropdown [options]="programList" id="programName" [(ngModel)]="assignment.programName" placeholder="Select Program Name" optionLabel="programName"
+            [showClear]="true"></p-dropdown>
+
+        <label for="batchName">Batch Number</label>
+        <p-dropdown [options]="batchList" [(ngModel)]="assignment.batchName" placeholder="Select Batch" optionLabel="batchName"
+            [showClear]="true"></p-dropdown>
         <div class="p-field">
+
             <label for="assignment">Assignment Name</label>
             <input type="text" pInputText id="assignment" [(ngModel)]="assignment.assignmentName" required autofocus />
             <small class="p-invalid" *ngIf="submitted && !assignment.assignmentName">Name is required.</small>
@@ -135,7 +143,7 @@
         </div>
 
         <div class="p-field">
-            <label for="programDescription">Assignment Grade</label>
+            <label for="programDescription"> Grade By</label>
             <input type="text" id="graderId" pInputText [(ngModel)]="assignment.graderId" required rows="3" cols="20" />
         </div>
 
@@ -149,6 +157,31 @@
             <label for="icon">Assignment Due Date</label>
             <p-calendar [(ngModel)]="assignment.dueDate" [showIcon]="true" inputId="icon"
                 [style]="{ 'position': 'relative', 'z-index': '100' }"></p-calendar>
+        </div>
+        <div class="p-field">
+            <label for="icon">Assignment File 1</label>
+            <input id="Path1" type="path" pInputText [(ngModel)]="assignment.pathAttachment1" [showIcon]="true" inputId="icon"
+                placeholder=" File Path" [style]="{ 'position': 'relative', 'z-index': '100' }">
+        </div>
+        <div class="p-field">
+            <label for="icon">Assignment File 2</label>
+            <input id="Path2" type="path" pInputText [(ngModel)]="assignment.pathAttachment2" [showIcon]="true" inputId="icon"
+                placeholder=" File Path" [style]="{ 'position': 'relative', 'z-index': '100' }">
+        </div>
+        <div class="p-field">
+            <label for="icon">Assignment File 3</label>
+            <input id="Path3" type="path" pInputText [(ngModel)]="assignment.pathAttachment3" [showIcon]="true" inputId="icon"
+                placeholder=" File Path" [style]="{ 'position': 'relative', 'z-index': '100' }">
+        </div>
+        <div class="p-field">
+            <label for="icon">Assignment File 4</label>
+            <input id="Path4" type="path" pInputText [(ngModel)]="assignment.pathAttachment4" [showIcon]="true" inputId="icon"
+                placeholder=" File Path" [style]="{ 'position': 'relative', 'z-index': '100' }">
+        </div>
+        <div class="p-field">
+            <label for="icon">Assignment File 5</label>
+            <input id="Path5" type="path" pInputText [(ngModel)]="assignment.pathAttachment5" [showIcon]="true" inputId="icon"
+                placeholder=" File Path" [style]="{ 'position': 'relative', 'z-index': '100' }">
         </div>
     </ng-template>
     <ng-template pTemplate="footer">
