@@ -38,21 +38,16 @@ export class SessionComponent implements OnInit {
   csId:string;
   userList:User[];
   userId:string;
-  
-
-
-
   constructor(private sessionService: SessionService,
     private userService :UserService,
-    
-     private batchService:BatchService,private messageService:MessageService,
+    private batchService:BatchService,private messageService:MessageService,
     private confirmationService:ConfirmationService) { }
 
   ngOnInit() {
     this.getSessionList();
     this.batchService.getBatchList().subscribe(
       batList=>{this.batchList=batList;})
-    this.userService.getUsers().subscribe(
+    this.userService.getAllUsers().subscribe(
       user1List=>{this.userList=user1List}
   )
   }
@@ -63,6 +58,10 @@ export class SessionComponent implements OnInit {
       this.submitted=false;
       this.sessionDialogue=true;  
   
+    }
+    hideDialog() {
+      this.sessionDialogue = false;
+      this.submitted = false;
     }
     
     addSession() {

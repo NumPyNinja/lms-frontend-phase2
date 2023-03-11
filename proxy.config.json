@@ -1,13 +1,11 @@
 {
   "/api": {
-    "target":"http://localhost:1234/lms",
+    "target":"http://localhost:1234/lms/",
     "pathRewrite": {
       "^/api": ""
     },
     "changeOrigin": true,
     "logLevel": "debug",
     "secure": false
-    
-
   }
 }

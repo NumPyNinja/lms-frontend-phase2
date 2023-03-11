@@ -31,7 +31,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
@@ -78,7 +78,7 @@ import { MatRadioModule } from '@angular/material/radio';
 		ToastModule,
     InputTextModule,
     ProgressBarModule,
-    
+    MatDatepickerModule
   ],
   providers: []
 })

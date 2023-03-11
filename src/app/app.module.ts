@@ -24,10 +24,15 @@ import { MatCardModule } from '@angular/material/card';
 import { UserComponent } from './user/user/user.component';
 import { AssignmentComponent } from './assignment/assignment/assignment.component';
 import { AttendanceComponent } from './attendance/attendance/attendance.component';
-import { SessionComponent } from './session/session/session.component';
+
 import {ListboxModule} from 'primeng/listbox';
-
-
+import { SignupComponent } from './login/sign-up/sign-up/sign-up.component';
+import { ClassComponent } from './class/class/class.component';
+import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
+import { VerificationCodeComponent } from './login/forgot-password/verification-code/verification-code.component';
+import { DropdownModule } from 'primeng/dropdown';
+import {MessagesModule} from 'primeng/messages';
+import { SessionComponent } from './session/session/session.component';
 
 @NgModule({
   declarations: [
@@ -40,8 +45,14 @@ import {ListboxModule} from 'primeng/listbox';
     UserComponent,
     AssignmentComponent,
     AttendanceComponent,
-    SessionComponent,
-    ],
+    SignupComponent,
+    ClassComponent,
+    ForgotPasswordComponent,
+    VerificationCodeComponent,
+    SessionComponent
+
+  ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -57,6 +68,9 @@ import {ListboxModule} from 'primeng/listbox';
     MatRadioModule,
     MatCardModule,
     ListboxModule,
+    DropdownModule,
+    MessagesModule
+    
   ],
   providers: [AuthService, AuthGuard, MessageService, ConfirmationService],
   bootstrap: [AppComponent]
