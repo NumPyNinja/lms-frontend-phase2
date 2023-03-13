@@ -36,6 +36,7 @@ export class ProgramComponent implements OnInit {
 
   status: string[] = ['Active', 'Inactive'];
 
+
   constructor(
     private programService: ProgramService,
     private messageService: MessageService,
@@ -98,14 +99,11 @@ export class ProgramComponent implements OnInit {
       },
     });
   }
-
   hideDialog() {
     this.programDialogue = false;
     this.submitted = false;
   }
-
   saveProgram() {
-
     this.submitted = true;
     if (this.program.programName.trim()) {
       if (this.program.programId) {
@@ -122,22 +120,25 @@ export class ProgramComponent implements OnInit {
           console.log('a program is updated')
         });
       } else {
-
         this.programSize = this.programSize + 1;
         this.program.programId = this.programSize.toString();
-        this.programs.push(this.program);
         this.programService.addProgram(this.program).subscribe((res) => {
-        });
-
-
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Program Created',
-          life: 3000,
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Successful',
+            detail: 'Program Created Successfully',
+            life: 3000,
+          });
+          this.getProgramList();
+        }, (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Failed',
+            detail: error,
+            life: 3000,
+          });
         });
       }
-
       this.programs = [...this.programs];
       this.programDialogue = false;
       this.program = {};
@@ -146,13 +147,13 @@ export class ProgramComponent implements OnInit {
 
   findIndexById(id: string): number {
     let index = -1;
-    if(this.programs !== undefined)
-    for (let i = 0; i < this.programs.length; i++) {
-      if (this.programs[i].programId === id) {
-        index = i;
-        break;
+    if (this.programs !== undefined)
+      for (let i = 0; i < this.programs.length; i++) {
+        if (this.programs[i].programId === id) {
+          index = i;
+          break;
+        }
       }
-    }
     return index;
   }
 
