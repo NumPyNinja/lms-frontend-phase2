@@ -70,7 +70,7 @@
               <p-tableCheckbox [value]="user"></p-tableCheckbox>
             </td>
             <td>
-              <p-button label="{{user.user_id}}" styleClass="p-button-link" (click)="viewUser(user)"></p-button>
+              <p-button label="{{user.user_id}}" styleClass="p-button-link" (click)="getUserList()"></p-button>
             </td>
             <td>{{user.firstName}} {{user.lastName}}</td>
             <td style="word-wrap: break-word;">{{user.emailAddress}}</td>

@@ -135,7 +135,7 @@ export class ProgramComponent implements OnInit {
           summary: 'Successful',
           detail: 'Program Created',
           life: 3000,
-        });
+        })
       }
 
       this.programs = [...this.programs];
