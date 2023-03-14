@@ -1,6 +1,8 @@
 import { UserRoleMaps } from "./user-role-maps";
 
+
 export interface User {
+    
     userComments?: string;
     userVisaStatus?: string;
     userFirstName?: string;
@@ -16,5 +18,7 @@ export interface User {
     userRoleMaps?: UserRoleMaps;
     userName?: string;
     password?: string;
+    
+    
 }
 

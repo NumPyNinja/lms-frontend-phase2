@@ -4,6 +4,8 @@ import{User}from '../user';
 import { UserService } from '../user.service';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import { BatchService } from 'src/app/batch/batch.service';
+import { Batch } from 'src/app/batch/batch';
 
 @Component({
   selector: 'app-user',
@@ -14,37 +16,58 @@ export class UserComponent implements OnInit {
 
   users: User[];
   user:User;
+  batchList:Batch[];
+  batchId:number;
+  
   visibility: boolean = false;
   userSize: number;
   selectedUsers: User[];
   submitted: boolean;
   userDialogue : boolean = false;
   viewUserDialogue:boolean=false;
+  
+  userId:string;
+  roleId:string;
   //to save user profile picture
   imageFile : any = File;
   resumeFile : any = File;
   role = new FormControl();
-  userRole:string[]=['Admin','Staff','Student'];
-  visaTypes: string[] = ['Not-Specified', 'NA', 'GC-EAD', 'H4-EAD', 'H4', 'H1B', 
+  userRoleMaps:string[]=['Admin','Staff','Student'];
+  userVisaStatus: string[] = ['Not-Specified', 'NA', 'GC-EAD', 'H4-EAD', 'H4', 'H1B', 
   'Canada-EAD', 'Indian-Citizen', 'US-Citizen', 'Canada-Citizen'];
 
   constructor(private userService: UserService,private fb: FormBuilder,private messageService: MessageService,
-    private confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService,private batchService: BatchService) { }
  
   ngOnInit(): void { 
     this.getUserList();
+    
+    this.batchService.getBatchList().subscribe(
+      batList=>{this.batchList=batList;
+        
+      })
   }
   private selectRow(checkValue: any) {
   // console.log(checkValue);
   }
+  
   private getUserList() {
     this.visibility = true;
-    this.userService.getUsers().subscribe((res)=> {
-      this.users=res.userDetails;
+    this.userService.getAllUsers().subscribe((res)=> {
+      this.users=res;
+     // this.userSize = this.getMaxUserId(0);
       this.visibility = false;
-    });
-    
+      
+          });
   }
+    
+  
+ 
+ 
+ 
+ 
+    
+  
   viewUser(user: User) {
     this.user = { ...user };
     this.viewUserDialogue = true;
@@ -83,11 +106,12 @@ export class UserComponent implements OnInit {
     usercomments: [null, Validators.required],
     fileType: [null, Validators.required],
     location:[],
-    userRole: [null, Validators.required],
+    userRoleMaps: [null, Validators.required],
   //  batch: [null, Validators.required],
-    visaStatus: [null, Validators.required],
+    userVisaStatus: [null, Validators.required],
     userName: [null, Validators.required],
     password: [null, Validators.required],
+    
   //  address: [null, Validators.required],
    // city: [null, Validators.required],
     //state: [null, Validators.required],
@@ -220,6 +244,7 @@ export class UserComponent implements OnInit {
         userData.append("userInfo", JSON.stringify(this.userForm.value));
         userData.append("imageFile", this.imageFile);
         userData.append("resume",this.resumeFile);
+        
         
         this.userService.addUser(userData).subscribe({
           next:(res) => {

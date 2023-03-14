@@ -3,6 +3,7 @@ import {  Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { User } from './user';
+import { UserRoleMaps } from './user-role-maps';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,12 +17,15 @@ export class UserService {
     //return this.httpClient.get<any>('assets/Users.json')
     return this.httpClient.get<User[]>(this.url+"/users/roles");
   }
-
-  getAllUsers(): Observable<any> {
+ 
+  getAllUsers(): Observable<User[]> {
     //return this.httpClient.get<any>('assets/Users.json')
     return this.httpClient.get<User[]>(this.url+"/users");
   }
-
+  getUserRole(): Observable<any> {
+    //return this.httpClient.get<any>('assets/Users.json')
+    return this.httpClient.get<UserRoleMaps[]>(this.url+"users/roles");
+  }
   addUser(userData:FormData){
 
     return this.httpClient.post<any>(this.url+'/users/roleStatus',userData);
