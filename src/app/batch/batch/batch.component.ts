@@ -79,7 +79,7 @@ export class BatchComponent implements OnInit {
           detail: 'batch Updated',
           life: 3000,
         });
-        this.batch.programName = pro;
+        this.batch.programName = pro.programName;
         this.batch.programId = pro1;
         this.batchService.updateBatch(this.batch).subscribe((res) => {
           console.log('a batch is updated')
