@@ -6,6 +6,10 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { Assignment, AssignmentSelect, UploadedAssignment } from '../assignment';
 import { AssignmentService } from '../assignment.service';
 import { Message } from 'primeng/api'
+import { ProgramService } from 'src/app/program/program.service';
+import { Program } from 'src/app/program/program';
+import { BatchService } from 'src/app/batch/batch.service';
+import { Batch } from 'src/app/batch/batch';
 
 
 @Component({
@@ -29,12 +33,29 @@ export class AssignmentComponent implements OnInit {
   userId: string = "";
   subscription: Subscription;
   message1: Message[] = [];
+  programList: Program[];
+  batchList:Batch[];
+
 
   constructor(
     private assignmentService: AssignmentService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private authService: AuthService) { }
+    private programService: ProgramService,
+    private batchService: BatchService,
+    private authService: AuthService) { 
+      {
+        this.programService.getPrograms().subscribe(list => {
+          this.programList = list;
+        })
+      }
+      {
+        this.batchService.getBatchList().subscribe(list => {
+          this.batchList = list;
+        })
+      }
+    
+    }
 
   ngOnInit(): void {
     this.getAssignmentList();
@@ -96,7 +117,6 @@ export class AssignmentComponent implements OnInit {
       } else {
         this.assignmentSize = this.assignmentSize + 1;
         this.assignment.batchId = this.assignmentSize;
-        this.assignment.createdBy = 'U02';
         this.assignment.graderId = 'U02';
         this.assignmentService.saveAssignment(this.assignment).subscribe((res) => {
           this.assignmentService.getAssignments().subscribe((res) => {
@@ -114,6 +134,11 @@ export class AssignmentComponent implements OnInit {
       this.assigmentDialogue = false;
       this.assignment = {};
     }
+  
+  }
+  hideDialog() {
+    this.assigmentDialogue = false;
+    this.submitted = false;
   }
 
   deleteAssigment(assigment: Assignment) {
@@ -123,7 +148,6 @@ export class AssignmentComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.assignments = this.assignments.filter((val) => val.assignmentId !== assigment.assignmentId);
-
         this.assignmentService.delete(assigment).subscribe(response => {
         })
         this.messageService.add({
@@ -181,5 +205,9 @@ export class AssignmentComponent implements OnInit {
     });
   }
 
+}
+
+function hideDialog() {
+  throw new Error('Function not implemented.');
 }
 
