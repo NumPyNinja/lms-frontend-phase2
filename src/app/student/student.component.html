@@ -1,0 +1,134 @@
+<p-toast></p-toast>
+<div class="signin-content">
+    <mat-card>
+        <mat-card-content>
+            <mat-card-title>
+                <div class="box">
+                    Student Details<br>
+                </div><br>
+                <!--  <div class="box">
+               <div>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-danger"
+                        (click)="deleteSelectedStudents()"
+                        [disabled]="!selectedStudents || !selectedStudents.length"></button>
+                </div> 
+                <div>
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" id="filterGlobal"
+                            (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                    </span>
+                </div>
+
+                <button type="button" label="Show" pButton pRipple id="new" label="Upload Assignment" icon="pi pi-plus"
+                    class="p-button-rounded p-button-success" (click)="showDialog()"> </button>
+                <p-dialog header="Upload Assigment" [(visible)]="displayUploadAssignmentDialog"
+                    [style]="{width: '55vw'}" [draggable]="false">
+                    <div class="card">
+                        <div class="field">
+                            <input id="Path" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path"
+                                size="100"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                             border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+                        </div>
+                    </div>
+                    <div>
+                        <p-dropdown [options]="assignmentSelectList" [virtualScroll]="true" [editable]="true"
+                            appendTo="body" [(ngModel)]="selectedUploadAssignment" placeholder="Select Assignment"
+                            optionLabel="assignmentName"></p-dropdown>
+                    </div>
+                    <ng-template pTemplate="footer">
+                        <p-button (click)="uploadAssignment()" label="Upload" icon="pi pi-times"
+                            styleClass="p-button-rounded p-button-success">
+                        </p-button>
+                        <p-button (click)="closePopup()" label="Cancel" icon="pi pi-times"
+                            styleClass="p-button-rounded p-button-danger">
+                        </p-button>
+                    </ng-template>
+                </p-dialog>
+            </div> -->
+            </mat-card-title>
+
+            <p-dropdown class="user-drop" [options]="users" [(ngModel)]="selectedUsers" optionLabel="userFirstName"
+                [filter]="true" filterBy="userFirstName" [showClear]="true" placeholder="Select Student Name">
+                <ng-template pTemplate="selectedItem">
+                    <div class="user-item user-item-value" *ngIf="selectedUsers">
+                        <div>{{selectedUsers.userFirstName}}</div>
+                    </div>
+                </ng-template>
+                <ng-template let-user pTemplate="item">
+                    <div class="user-item">
+                        <div>{{user.userFirstName}}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+            <p-dropdown class="batch-drop" [options]="batchList" [(ngModel)]="getBatchList" optionLabel="batchId"
+                [filter]="true" filterBy="batchId" [showClear]="true" placeholder="Select batch Id" dataKey="batchId">
+                <ng-template pTemplate="selectedItem">
+                    <div class="batch-item batch-item-value" *ngIf="getBatchList">
+                        <div>{{getBatchList.batchId}}</div>
+                    </div>
+                </ng-template>
+                <ng-template let-batch pTemplate="item">
+                    <div class="batch-item">
+                        <div>{{batch.batchId}}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+
+
+            <!-- <p-table #dt responsiveLayout="stack" [value]="users" [rows]="5" [paginator]="true"
+                [globalFilterFields]="['userFirstName','userId','batchName']" [(selection)]="selectedUsers"
+                [rowHover]="true" dataKey="userId"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [showCurrentPageReport]="true">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+
+                        <th pSortableColumn="userId">User Id <p-sortIcon field="userId"></p-sortIcon>
+                        </th>
+
+                        <th pSortableColumn="batchName">Batch Name <p-sortIcon field="batchName"></p-sortIcon>
+                        </th>
+
+                        <th pSortableColumn="userFirstName"> Name <p-sortIcon field="userFirstName">
+                            </p-sortIcon>
+                        </th>
+
+                        <th pSortableColumn="Email">Email <p-sortIcon field="Email"></p-sortIcon>
+                        </th>
+
+                        <th> Edit Delete
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-user>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="user"></p-tableCheckbox>
+                        </td>
+                        <td>{{user.userId}}</td>
+                        <td>{{user.batchName}}</td>
+                        <td>{{user.userFirstName}}</td>
+                        <td>{{user.Email}}</td>
+                        <td>
+                            <div class="action">
+                                <span>
+                                    <button pButton pRipple icon="pi pi-pencil"
+                                        class="p-button-rounded p-button-success" id="editStudent"
+                                        (click)="editStudent(student)"></button>
+                                </span>
+                                <span>
+                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
+                                        id="deleteStudent" (click)="deleteStudent(student)"></button>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table> -->
+        </mat-card-content>
+    </mat-card>
+</div>
