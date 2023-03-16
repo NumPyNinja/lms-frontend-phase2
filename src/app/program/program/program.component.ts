@@ -123,6 +123,7 @@ export class ProgramComponent implements OnInit {
         this.programSize = this.programSize + 1;
         this.program.programId = this.programSize.toString();
         this.programService.addProgram(this.program).subscribe((res) => {
+
           this.messageService.add({
             severity: 'success',
             summary: 'Successful',
@@ -138,6 +139,7 @@ export class ProgramComponent implements OnInit {
             life: 3000,
           });
         });
+
       }
       this.programs = [...this.programs];
       this.programDialogue = false;
