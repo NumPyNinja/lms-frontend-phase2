@@ -1,0 +1,109 @@
+<p-toast></p-toast>
+<div class="signin-content">
+    <mat-card>
+        <mat-card-content>
+            <mat-card-title>
+                <div class="box">
+                    Student Details<br>
+                </div><br>
+            </mat-card-title>
+            <h4 class="dropdown-title">Select Student :</h4>
+            <p-dropdown class="user-drop" [options]="users" [(ngModel)]="selectedUsers" optionLabel="userFirstName"
+                [filter]="true" filterBy="userFirstName" [showClear]="true" placeholder="Select Student Name">
+                <ng-template pTemplate="selectedItem">
+                    <div class="user-item user-item-value" *ngIf="selectedUsers">
+                        <div>{{selectedUsers.userFirstName}}</div>
+                    </div>
+                </ng-template>
+                <ng-template let-user pTemplate="item">
+                    <div class="user-item">
+                        <div>{{user.userFirstName}}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+            <h4 class=dropdown-title>Select Batch :</h4>
+            <p-dropdown class="batch-drop" [options]="batchList" [(ngModel)]="getBatchList" optionLabel="batchId"
+                [filter]="true" filterBy="batchId" [showClear]="true" placeholder="Select batch Id" dataKey="batchId">
+                <ng-template pTemplate="selectedItem">
+                    <div class="batch-item batch-item-value" *ngIf="getBatchList">
+                        <div>{{getBatchList.batchId}}</div>
+                    </div>
+                </ng-template>
+                <ng-template let-batch pTemplate="item">
+                    <div class="batch-item">
+                        <div>{{batch.batchId}}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+            <div class="settings">
+                <form class="container">
+                    <label>Student Name :</label>
+                    <label></label>
+                    <label>Batch Name :</label>
+                    <label></label>
+                    <label>Grades :</label>
+                    <label></label>
+                </form>
+            </div>
+
+            <div class="assigment-button">
+                <button type="button" label="Show" pButton pRipple id="new" label="Upload Assignment" icon="pi pi-plus"
+                    class="p-button-rounded p-button-success" (click)="showDialog()"> </button>
+                <p-dialog header="Upload Assigment" [(visible)]="displayUploadAssignmentDialog"
+                    [style]="{width: '47vw'}" [draggable]="false">
+                    <div class="card">
+                        <div class="field">
+                            <label>Assignment File 1</label>
+                            <input id="Path" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path" size="90"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                             border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+                        </div>
+
+                        <div>
+                            <label for="icon">Assignment File 2</label>
+                            <input id="Path1" inputId="icon" type="path" [(ngModel)]="inputFilePath"
+                                placeholder="Upload Path" size="90"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                             border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+                        </div>
+                        <div>
+                            <label for="icon">Assignment File 3</label>
+                            <input id="Path2" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path"
+                                size="90"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                             border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+                        </div>
+                        <div>
+                            <label for="icon">Assignment File 4</label>
+                            <input id="Path3" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path"
+                                size="90"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                             border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+                        </div>
+                        <div>
+                            <label for="icon">Assignment File 5</label>
+                            <input id="Path4" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path"
+                                size="90"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                             border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+                        </div>
+                    </div>
+                    <div>
+                        <p-dropdown [options]="assignmentSelectList" [virtualScroll]="true" [editable]="true"
+                            appendTo="body" [(ngModel)]="selectedUploadAssignment" placeholder="Select Assignment"
+                            optionLabel="assignmentName"></p-dropdown>
+                    </div>
+                    <ng-template pTemplate="footer">
+                        <p-button (click)="uploadAssignment()" label="Upload" icon="pi pi-times"
+                            styleClass="p-button-rounded p-button-success">
+                        </p-button>
+                        <p-button (click)="closePopup()" label="Cancel" icon="pi pi-times"
+                            styleClass="p-button-rounded p-button-danger">
+                        </p-button>
+                    </ng-template>
+                </p-dialog>
+            </div>
+            <div class="box" style="height:50px;"> </div>
+        </mat-card-content>
+    </mat-card>
+</div>

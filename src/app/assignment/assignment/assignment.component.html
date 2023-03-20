@@ -22,7 +22,7 @@
                         class="p-button-rounded p-button-success" (click)="openNew()"></button>
                 </div>
 
-                <button type="button" label="Show" pButton pRipple id="new" label="Upload Assignment" icon="pi pi-plus"
+                <!-- <button type="button" label="Show" pButton pRipple id="new" label="Upload Assignment" icon="pi pi-plus"
                     class="p-button-rounded p-button-success" (click)="showDialog()"> </button>
                 <p-dialog header="Upload Assigment" [(visible)]="displayUploadAssignmentDialog"
                     [style]="{width: '55vw'}" [draggable]="false">
@@ -47,7 +47,7 @@
                             styleClass="p-button-rounded p-button-danger">
                         </p-button>
                     </ng-template>
-                </p-dialog>
+                </p-dialog> -->
 
             </div>
         </mat-card-title>
@@ -124,12 +124,12 @@
     styleClass="p-fluid">
     <ng-template pTemplate="content">
         <label for="programName">Program Name</label>
-        <p-dropdown [options]="programList" id="programName" [(ngModel)]="assignment.programName" placeholder="Select Program Name" optionLabel="programName"
-            [showClear]="true"></p-dropdown>
+        <p-dropdown [options]="programList" id="programName" [(ngModel)]="assignment.programName"
+            placeholder="Select Program Name" optionLabel="programName" [showClear]="true"></p-dropdown>
 
         <label for="batchName">Batch Number</label>
-        <p-dropdown [options]="batchList" [(ngModel)]="assignment.batchName" placeholder="Select Batch" optionLabel="batchName"
-            [showClear]="true"></p-dropdown>
+        <p-dropdown [options]="batchList" [(ngModel)]="assignment.batchName" placeholder="Select Batch"
+            optionLabel="batchName" [showClear]="true"></p-dropdown>
         <div class="p-field">
 
             <label for="assignment">Assignment Name</label>
@@ -160,28 +160,28 @@
         </div>
         <div class="p-field">
             <label for="icon">Assignment File 1</label>
-            <input id="Path1" type="path" pInputText [(ngModel)]="assignment.pathAttachment1" [showIcon]="true" inputId="icon"
-                placeholder=" File Path" [style]="{ 'position': 'relative', 'z-index': '100' }">
+            <input id="Path1" type="path" pInputText [(ngModel)]="assignment.pathAttachment1" [showIcon]="true"
+                inputId="icon" placeholder=" File Path" [style]="{ 'position': 'relative', 'z-index': '100' }">
         </div>
         <div class="p-field">
             <label for="icon">Assignment File 2</label>
-            <input id="Path2" type="path" pInputText [(ngModel)]="assignment.pathAttachment2" [showIcon]="true" inputId="icon"
-                placeholder=" File Path" [style]="{ 'position': 'relative', 'z-index': '100' }">
+            <input id="Path2" type="path" pInputText [(ngModel)]="assignment.pathAttachment2" [showIcon]="true"
+                inputId="icon" placeholder=" File Path" [style]="{ 'position': 'relative', 'z-index': '100' }">
         </div>
         <div class="p-field">
             <label for="icon">Assignment File 3</label>
-            <input id="Path3" type="path" pInputText [(ngModel)]="assignment.pathAttachment3" [showIcon]="true" inputId="icon"
-                placeholder=" File Path" [style]="{ 'position': 'relative', 'z-index': '100' }">
+            <input id="Path3" type="path" pInputText [(ngModel)]="assignment.pathAttachment3" [showIcon]="true"
+                inputId="icon" placeholder=" File Path" [style]="{ 'position': 'relative', 'z-index': '100' }">
         </div>
         <div class="p-field">
             <label for="icon">Assignment File 4</label>
-            <input id="Path4" type="path" pInputText [(ngModel)]="assignment.pathAttachment4" [showIcon]="true" inputId="icon"
-                placeholder=" File Path" [style]="{ 'position': 'relative', 'z-index': '100' }">
+            <input id="Path4" type="path" pInputText [(ngModel)]="assignment.pathAttachment4" [showIcon]="true"
+                inputId="icon" placeholder=" File Path" [style]="{ 'position': 'relative', 'z-index': '100' }">
         </div>
         <div class="p-field">
             <label for="icon">Assignment File 5</label>
-            <input id="Path5" type="path" pInputText [(ngModel)]="assignment.pathAttachment5" [showIcon]="true" inputId="icon"
-                placeholder=" File Path" [style]="{ 'position': 'relative', 'z-index': '100' }">
+            <input id="Path5" type="path" pInputText [(ngModel)]="assignment.pathAttachment5" [showIcon]="true"
+                inputId="icon" placeholder=" File Path" [style]="{ 'position': 'relative', 'z-index': '100' }">
         </div>
     </ng-template>
     <ng-template pTemplate="footer">

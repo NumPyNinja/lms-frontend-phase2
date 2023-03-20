@@ -3,7 +3,7 @@ import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Assignment, AssignmentSelect, UploadedAssignment } from '../assignment';
+import { Assignment, AssignmentSelect } from '../assignment';
 import { AssignmentService } from '../assignment.service';
 import { Message } from 'primeng/api'
 import { ProgramService } from 'src/app/program/program.service';
@@ -34,7 +34,9 @@ export class AssignmentComponent implements OnInit {
   subscription: Subscription;
   message1: Message[] = [];
   programList: Program[];
-  batchList:Batch[];
+  batchList: Batch[];
+  programName: string;
+  batchName: string;
 
 
   constructor(
@@ -43,19 +45,19 @@ export class AssignmentComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private programService: ProgramService,
     private batchService: BatchService,
-    private authService: AuthService) { 
-      {
-        this.programService.getPrograms().subscribe(list => {
-          this.programList = list;
-        })
-      }
-      {
-        this.batchService.getBatchList().subscribe(list => {
-          this.batchList = list;
-        })
-      }
-    
+    private authService: AuthService) {
+    {
+      this.programService.getPrograms().subscribe(list => {
+        this.programList = list;
+      })
     }
+    {
+      this.batchService.getBatchList().subscribe(list => {
+        this.batchList = list;
+      })
+    }
+
+  }
 
   ngOnInit(): void {
     this.getAssignmentList();
@@ -101,6 +103,10 @@ export class AssignmentComponent implements OnInit {
   //save an assigment
   saveAssignment() {
     this.submitted = true;
+    const atd: any = this.assignment.batchName;
+    this.assignment.batchId = atd.batchId;
+    const att: any = this.assignment.programName;
+    this.assignment.programId = att.programId;
     if (this.assignment.assignmentName.trim()) {
       if (this.assignment.assignmentId) {
         this.assignmentService.updateAssignment(this.assignment).subscribe((res) => {
@@ -117,7 +123,9 @@ export class AssignmentComponent implements OnInit {
       } else {
         this.assignmentSize = this.assignmentSize + 1;
         this.assignment.batchId = this.assignmentSize;
-        this.assignment.graderId = 'U02';
+        this.assignment.graderId = this.userId;
+        this.assignment.programName = att.programName;
+        this.assignment.batchName = atd.batchName
         this.assignmentService.saveAssignment(this.assignment).subscribe((res) => {
           this.assignmentService.getAssignments().subscribe((res) => {
             this.assignments = res;
@@ -134,7 +142,7 @@ export class AssignmentComponent implements OnInit {
       this.assigmentDialogue = false;
       this.assignment = {};
     }
-  
+
   }
   hideDialog() {
     this.assigmentDialogue = false;
@@ -176,38 +184,38 @@ export class AssignmentComponent implements OnInit {
     }
     return index;
   }
-
+}
   // upload Assigment button
 
-  displayUploadAssignmentDialog: boolean = false;
+//   displayUploadAssignmentDialog: boolean = false;
 
-  showDialog() {
-    this.displayUploadAssignmentDialog = true;
-  }
+//   showDialog() {
+//     this.displayUploadAssignmentDialog = true;
+//   }
 
-  closePopup() {
-    this.displayUploadAssignmentDialog = false;
-  }
+//   closePopup() {
+//     this.displayUploadAssignmentDialog = false;
+//   }
 
-  uploadAssignment() {
-    const uploadedAssignment: UploadedAssignment = {
-      filePath: this.inputFilePath,
-      assignmentId: this.selectedUploadAssignment.assignmentId,
-      uploadDate: new Date(),
-      uploadUser: this.userId
-    };
-    this.assignmentService.uploadAssignments(uploadedAssignment).subscribe((res) => {
-      this.inputFilePath = "";
-      this.selectedUploadAssignment = undefined;
-      this.closePopup();
-      this.message1 = [
-        { severity: 'success', summary: 'Filepath Uploaded Successfully', detail: '' }];
-    });
-  }
+//   uploadAssignment() {
+//     const uploadedAssignment: UploadedAssignment = {
+//       filePath: this.inputFilePath,
+//       assignmentId: this.selectedUploadAssignment.assignmentId,
+//       uploadDate: new Date(),
+//       uploadUser: this.userId
+//     };
+//     this.assignmentService.uploadAssignments(uploadedAssignment).subscribe((res) => {
+//       this.inputFilePath = "";
+//       this.selectedUploadAssignment = undefined;
+//       this.closePopup();
+//       this.message1 = [
+//         { severity: 'success', summary: 'Filepath Uploaded Successfully', detail: '' }];
+//     });
+//   }
 
-}
+// }
 
-function hideDialog() {
-  throw new Error('Function not implemented.');
-}
+// function hideDialog() {
+//   throw new Error('Function not implemented.');
+// }
 

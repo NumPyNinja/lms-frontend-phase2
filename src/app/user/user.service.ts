@@ -9,6 +9,7 @@ import { User } from './user';
 export class UserService {
 
   url: string = '/api';//'https://lms-admin-rest-service.herokuapp.com/programs';
+  users: any;
 
   constructor(private httpClient: HttpClient) { }
 

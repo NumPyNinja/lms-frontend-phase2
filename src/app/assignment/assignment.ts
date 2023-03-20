@@ -1,5 +1,5 @@
 export interface Assignment {
-    
+
     assignmentId?: string,
     assignmentName?: string,
     assignmentDescription?: string,
@@ -12,7 +12,10 @@ export interface Assignment {
     pathAttachment5?: string,
     createdBy?: string,
     batchId?: number,
-    graderId?: string
+    graderId?: string,
+    programId?: number
+    programName?: string,
+    batchName?: string
 }
 
 export interface AssignmentSelect {
@@ -20,10 +23,4 @@ export interface AssignmentSelect {
     assignmentId?: string;
 }
 
-export interface UploadedAssignment {
-    fileId?: number,
-    filePath?: string,
-    uploadDate?: Date,
-    uploadUser?: string,
-    assignmentId?: string
-}
+

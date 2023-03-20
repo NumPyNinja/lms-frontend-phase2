@@ -12,6 +12,7 @@ import { Batch } from './batch';
 export class BatchService {
 
   url: string = '/api';
+  batchList: Batch[];
 
   constructor(private httpClient: HttpClient,
     private utilityService: UtilityService) { }
