@@ -33,7 +33,11 @@ import { VerificationCodeComponent } from './login/forgot-password/verification-
 import { DropdownModule } from 'primeng/dropdown';
 import {MessagesModule} from 'primeng/messages';
 import { SessionComponent } from './session/session/session.component';
+
+import { ResetPasswordComponent } from './login/forgot-password/reset-password/reset-password.component';
+
 import { StudentComponent } from './student/student.component';
+
 
 @NgModule({
   declarations: [
@@ -50,6 +54,7 @@ import { StudentComponent } from './student/student.component';
     ClassComponent,
     ForgotPasswordComponent,
     VerificationCodeComponent,
+    ResetPasswordComponent,
     SessionComponent,
     StudentComponent
 
