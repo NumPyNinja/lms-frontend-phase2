@@ -1,6 +1,8 @@
 {
   "/api": {
-    "target":"http://localhost:1234/",
+
+    "target":"http://lms-backend-service.herokuapp.com",
+
     "pathRewrite": {
       "^/api": "/lms"
     },

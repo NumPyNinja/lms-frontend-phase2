@@ -70,7 +70,7 @@
               <p-tableCheckbox [value]="user"></p-tableCheckbox>
             </td>
             <td>
-              <p-button label="{{user.user_id}}" styleClass="p-button-link" (click)="viewUser(user)"></p-button>
+              <p-button label="{{user.user_id}}" styleClass="p-button-link" (click)="getUserList()"></p-button>
             </td>
             <td>{{user.firstName}} {{user.lastName}}</td>
             <td style="word-wrap: break-word;">{{user.emailAddress}}</td>
@@ -167,8 +167,8 @@
                 <mat-form-field class="full-width">
                   <mat-form-field appearance="fill">
                     <mat-label>User Role</mat-label>
-                    <mat-select [formControl]="userRole" multiple>
-                      <mat-option *ngFor="let role of userRole" [value]="role">{{role}}</mat-option>
+                    <mat-select [formControl]="userRoleMaps" multiple>
+                      <mat-option *ngFor="let role of userRoleMaps" [value]="role">{{role}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </mat-form-field>
@@ -178,8 +178,8 @@
                 <mat-form-field class="full-width">
                   <mat-form-field appearance="fill">
                     <mat-label>Visa Status </mat-label>
-                    <mat-select [formControl]="visaStatus">
-                      <mat-option *ngFor="let v1 of visaTypes" [value]="v1">{{v1}}</mat-option>
+                    <mat-select [formControl]="userVisaStatus">
+                      <mat-option *ngFor="let v1 of userVisaStatus" [value]="v1">{{v1}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </mat-form-field>
@@ -360,7 +360,7 @@
         </tr>
         <tr>
           <th>Visa Status</th>
-          <th><span class="viewtableData">{{user.visaStatus}}</span></th>
+          <th><span class="viewtableData">{{user.userVisaStatus}}</span></th>
         </tr>
       </ng-template>
     </p-table>

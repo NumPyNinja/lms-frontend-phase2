@@ -16,5 +16,6 @@ export interface User {
     userRoleMaps?: UserRoleMaps;
     userName?: string;
     password?: string;
+    
 }
 

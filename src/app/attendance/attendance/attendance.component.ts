@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
-import { Class } from 'src/app/class/class';
-import { ClassService } from 'src/app/class/class.service';
 import { Program } from 'src/app/program/program';
 import { ProgramService } from 'src/app/program/program.service';
+import { Session } from 'src/app/session/session';
+import { SessionService } from 'src/app/session/session.service';
 import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
 import { Attendance } from '../attendance';
@@ -19,10 +19,11 @@ import { AttendanceService } from '../attendance.service';
   styleUrls: ['./attendance.component.scss']
 })
 export class AttendanceComponent implements OnInit {
-  selectedCountries: any[];
+ // selectedCountries: any[];
   attendances: Attendance[];
-  countries: Attendance[];
+ // countries: Attendance[];
   attendanceSize: number;
+  studentName:string;
   selectedAttendances: Attendance[];
   visibility: boolean = false;
   attendance: Attendance;
@@ -31,33 +32,44 @@ export class AttendanceComponent implements OnInit {
   submitted: boolean;
   programList: Program[];
   selectedProgram: string;
-  classList: Class[];
-  selectedClasses: Class[];
+  sessionList: Session[];
+  selectedClasses: Session[];
   selectedStudents: User[];
-  selectedDate: Date;
+  //selectedDate: Date;
   users: User[];
+  attendanceDrop: string[]=['Present','Absent','Late','Excused'];
+  selectedDrop:string[]=this.attendanceDrop;
 
   constructor(
     private attendanceService: AttendanceService,
     private messageService: MessageService,
     private programService: ProgramService,
     private confirmationService: ConfirmationService,
-    private classService: ClassService,
+    private sessionService:SessionService,
     private userService: UserService) {
-    this.programService.getPrograms().subscribe(list => {
-      this.programList = list;
-    })
+    
   }
 
   ngOnInit(): void {
     this.getAttendanceList();
-
+    this.programService.getPrograms().subscribe(list => {
+      this.programList = list;
+    })
+    this.userService.getAllUsers().subscribe(
+     userList2=>{this.users=userList2}
+    )
+    this.sessionService.getSessions().subscribe(res=>{
+      this.sessionList=res
+    })
+   
   }
 
   private getAttendanceList() {
     this.visibility = true;
+    
     this.attendanceService.getAttendanceList().subscribe((res) => {
       this.attendances = res;
+
       console.log('Backend data' + res)
       this.attendanceSize = this.getMaxAttendanceId(0);
       this.visibility = false;
@@ -81,10 +93,14 @@ export class AttendanceComponent implements OnInit {
     this.attendance = {};
     this.submitted = false;
     this.attendanceDialogue = true;
-    await this.classService.getClassList().subscribe(res => {
-      this.classList = res;
+    //await this.classService.getClassList().subscribe(res => {
+     // this.classList = res;
+    //})
+    this.sessionService.getSessions().subscribe(res=>{
+      this.sessionList=res
     })
-    await this.userService.getAllUsers().subscribe(res => {
+
+     this.userService.getAllUsers().subscribe(res => {
       this.users = res;
     })
 
@@ -97,11 +113,12 @@ export class AttendanceComponent implements OnInit {
 
   //save an attendance 
   saveAttendance() {
-
+   
     this.submitted = true;
-    if (this.attendance.attId) {
-      const attId = this.attendance.attId.trim();
-      this.attendances[this.findIndexById(attId)] = this.attendance;
+    //edit
+    
+      if(this.attendance.programId){
+         this.attendances[this.findIndexById(this.attendance.attId)] = this.attendance;
 
       this.messageService.add({
         severity: 'success',
@@ -109,8 +126,8 @@ export class AttendanceComponent implements OnInit {
         detail: 'Attendance Updated',
         life: 3000,
       });
-
-      this.attendanceService.getAttendanceList().subscribe((res) => {
+      
+      this.attendanceService.updateAttendance(this.attendance).subscribe((res) => {
         console.log('a attendance is save')
       });
 
@@ -121,7 +138,7 @@ export class AttendanceComponent implements OnInit {
           let attendance: Attendance = {};
           attendance.csId = selectedClass.csId.toString();
           attendance.studentId = selectedStudent.userId;
-          attendance.attendance = 'Present';
+          attendance.attendance = this.selectedDrop.toString();
           this.attendanceService.addAttendance(attendance).subscribe((res) => {
             newAttendanceCount = newAttendanceCount + 1;
           }, err => {
@@ -144,7 +161,7 @@ export class AttendanceComponent implements OnInit {
     }
     this.attendanceDialogue = false;
   }
-
+  //}
   deleteAttendance(attendance: Attendance) {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete ' + attendance.attId + '?',
@@ -167,8 +184,10 @@ export class AttendanceComponent implements OnInit {
   }
 
   editAttendance(attendance: Attendance) {
-    this.attendance = { ...this.attendance };
+    this.attendance = { ...attendance };
     this.attendanceDialogue = true;
+    //data:attendance;
+    this.attendance={};
   }
 
 
