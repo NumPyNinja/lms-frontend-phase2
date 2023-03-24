@@ -3,7 +3,7 @@ import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Assignment, AssignmentSelect, UploadedAssignment } from '../assignment';
+import { Assignment, AssignmentSelect } from '../assignment';
 import { AssignmentService } from '../assignment.service';
 import { Message } from 'primeng/api'
 import { ProgramService } from 'src/app/program/program.service';
@@ -36,7 +36,7 @@ export class AssignmentComponent implements OnInit {
   programList: Program[];
   batchList: Batch[];
   programName: string;
-  batchName: string
+  batchName: string;
 
 
   constructor(
@@ -184,38 +184,38 @@ export class AssignmentComponent implements OnInit {
     }
     return index;
   }
-
+}
   // upload Assigment button
 
-  displayUploadAssignmentDialog: boolean = false;
+//   displayUploadAssignmentDialog: boolean = false;
 
-  showDialog() {
-    this.displayUploadAssignmentDialog = true;
-  }
+//   showDialog() {
+//     this.displayUploadAssignmentDialog = true;
+//   }
 
-  closePopup() {
-    this.displayUploadAssignmentDialog = false;
-  }
+//   closePopup() {
+//     this.displayUploadAssignmentDialog = false;
+//   }
 
-  uploadAssignment() {
-    const uploadedAssignment: UploadedAssignment = {
-      filePath: this.inputFilePath,
-      assignmentId: this.selectedUploadAssignment.assignmentId,
-      uploadDate: new Date(),
-      uploadUser: this.userId
-    };
-    this.assignmentService.uploadAssignments(uploadedAssignment).subscribe((res) => {
-      this.inputFilePath = "";
-      this.selectedUploadAssignment = undefined;
-      this.closePopup();
-      this.message1 = [
-        { severity: 'success', summary: 'Filepath Uploaded Successfully', detail: '' }];
-    });
-  }
+//   uploadAssignment() {
+//     const uploadedAssignment: UploadedAssignment = {
+//       filePath: this.inputFilePath,
+//       assignmentId: this.selectedUploadAssignment.assignmentId,
+//       uploadDate: new Date(),
+//       uploadUser: this.userId
+//     };
+//     this.assignmentService.uploadAssignments(uploadedAssignment).subscribe((res) => {
+//       this.inputFilePath = "";
+//       this.selectedUploadAssignment = undefined;
+//       this.closePopup();
+//       this.message1 = [
+//         { severity: 'success', summary: 'Filepath Uploaded Successfully', detail: '' }];
+//     });
+//   }
 
-}
+// }
 
-function hideDialog() {
-  throw new Error('Function not implemented.');
-}
+// function hideDialog() {
+//   throw new Error('Function not implemented.');
+// }
 

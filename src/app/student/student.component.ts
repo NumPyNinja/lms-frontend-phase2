@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Message } from 'primeng/api';
-import { AssignmentSelect, UploadedAssignment } from '../assignment/assignment';
+import { AssignmentSelect, Assignment } from '../assignment/assignment';
 import { AssignmentService } from '../assignment/assignment.service';
 import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
 import { Batch } from 'src/app/batch/batch';
 import { BatchService } from 'src/app/batch/batch.service';
+import { UploadedAssignment } from './student';
+import { StudentService } from './student.service';
 
 
 @Component({
@@ -25,22 +27,32 @@ export class StudentComponent implements OnInit {
   selectedUsers: User[];
   user: User;
   batchList: Batch[];
-  batch : Batch;
+  batch: Batch;
   getBatchList: Batch[];
   first: number;
+  assignment: Assignment;
+  assignments: Assignment[];
+ 
 
 
   constructor(
-    private assignmentService: AssignmentService,
+    private studentService: StudentService,
     private userService: UserService,
-    private batchService: BatchService
-  ) {}
+    private batchService: BatchService,
+    private assignmentService: AssignmentService,
+  ) { 
+    {
+      this.assignmentService.getAssignments().subscribe(list =>{
+        this.assignmentSelectList = list;
+      })
+    }
+  }
 
   ngOnInit(): void {
-    this.userService.getAllUsers().subscribe((data)=>{
+    this.userService.getAllUsers().subscribe((data) => {
       this.users = data;
     });
-    this.batchService.getBatchList().subscribe((data)=>{
+    this.batchService.getBatchList().subscribe((data) => {
       this.batchList = data;
     });
   }
@@ -66,7 +78,7 @@ export class StudentComponent implements OnInit {
       uploadDate: new Date(),
       uploadUser: this.userId
     };
-    this.assignmentService.uploadAssignments(uploadedAssignment).subscribe((res) => {
+    this.studentService.uploadAssignments(uploadedAssignment).subscribe((res) => {
       this.inputFilePath = "";
       this.selectedUploadAssignment = undefined;
       this.closePopup();
@@ -76,5 +88,9 @@ export class StudentComponent implements OnInit {
   }
 
 }
+function hideDialog() {
+  throw new Error('Function not implemented.');
+}
+
 
 

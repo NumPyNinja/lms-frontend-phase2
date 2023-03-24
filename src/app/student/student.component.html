@@ -6,49 +6,8 @@
                 <div class="box">
                     Student Details<br>
                 </div><br>
-                <!--  <div class="box">
-               <div>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-danger"
-                        (click)="deleteSelectedStudents()"
-                        [disabled]="!selectedStudents || !selectedStudents.length"></button>
-                </div> 
-                <div>
-                    <span class="p-input-icon-left">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" id="filterGlobal"
-                            (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
-                    </span>
-                </div>
-
-                <button type="button" label="Show" pButton pRipple id="new" label="Upload Assignment" icon="pi pi-plus"
-                    class="p-button-rounded p-button-success" (click)="showDialog()"> </button>
-                <p-dialog header="Upload Assigment" [(visible)]="displayUploadAssignmentDialog"
-                    [style]="{width: '55vw'}" [draggable]="false">
-                    <div class="card">
-                        <div class="field">
-                            <input id="Path" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path"
-                                size="100"
-                                class="text-base text-color surface-overlay p-2 border-1 
-                             border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
-                        </div>
-                    </div>
-                    <div>
-                        <p-dropdown [options]="assignmentSelectList" [virtualScroll]="true" [editable]="true"
-                            appendTo="body" [(ngModel)]="selectedUploadAssignment" placeholder="Select Assignment"
-                            optionLabel="assignmentName"></p-dropdown>
-                    </div>
-                    <ng-template pTemplate="footer">
-                        <p-button (click)="uploadAssignment()" label="Upload" icon="pi pi-times"
-                            styleClass="p-button-rounded p-button-success">
-                        </p-button>
-                        <p-button (click)="closePopup()" label="Cancel" icon="pi pi-times"
-                            styleClass="p-button-rounded p-button-danger">
-                        </p-button>
-                    </ng-template>
-                </p-dialog>
-            </div> -->
             </mat-card-title>
-
+            <h4 class="dropdown-title">Select Student :</h4>
             <p-dropdown class="user-drop" [options]="users" [(ngModel)]="selectedUsers" optionLabel="userFirstName"
                 [filter]="true" filterBy="userFirstName" [showClear]="true" placeholder="Select Student Name">
                 <ng-template pTemplate="selectedItem">
@@ -62,6 +21,7 @@
                     </div>
                 </ng-template>
             </p-dropdown>
+            <h4 class=dropdown-title>Select Batch :</h4>
             <p-dropdown class="batch-drop" [options]="batchList" [(ngModel)]="getBatchList" optionLabel="batchId"
                 [filter]="true" filterBy="batchId" [showClear]="true" placeholder="Select batch Id" dataKey="batchId">
                 <ng-template pTemplate="selectedItem">
@@ -75,60 +35,75 @@
                     </div>
                 </ng-template>
             </p-dropdown>
+            <div class="settings">
+                <form class="container">
+                    <label>Student Name :</label>
+                    <label></label>
+                    <label>Batch Name :</label>
+                    <label></label>
+                    <label>Grades :</label>
+                    <label></label>
+                </form>
+            </div>
 
+            <div class="assigment-button">
+                <button type="button" label="Show" pButton pRipple id="new" label="Upload Assignment" icon="pi pi-plus"
+                    class="p-button-rounded p-button-success" (click)="showDialog()"> </button>
+                <p-dialog header="Upload Assigment" [(visible)]="displayUploadAssignmentDialog"
+                    [style]="{width: '47vw'}" [draggable]="false">
+                    <div class="card">
+                        <div class="field">
+                            <label>Assignment File 1</label>
+                            <input id="Path" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path" size="90"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                             border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+                        </div>
 
-            <!-- <p-table #dt responsiveLayout="stack" [value]="users" [rows]="5" [paginator]="true"
-                [globalFilterFields]="['userFirstName','userId','batchName']" [(selection)]="selectedUsers"
-                [rowHover]="true" dataKey="userId"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                [showCurrentPageReport]="true">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th style="width: 3rem">
-                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-
-                        <th pSortableColumn="userId">User Id <p-sortIcon field="userId"></p-sortIcon>
-                        </th>
-
-                        <th pSortableColumn="batchName">Batch Name <p-sortIcon field="batchName"></p-sortIcon>
-                        </th>
-
-                        <th pSortableColumn="userFirstName"> Name <p-sortIcon field="userFirstName">
-                            </p-sortIcon>
-                        </th>
-
-                        <th pSortableColumn="Email">Email <p-sortIcon field="Email"></p-sortIcon>
-                        </th>
-
-                        <th> Edit Delete
-                        </th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-user>
-                    <tr>
-                        <td>
-                            <p-tableCheckbox [value]="user"></p-tableCheckbox>
-                        </td>
-                        <td>{{user.userId}}</td>
-                        <td>{{user.batchName}}</td>
-                        <td>{{user.userFirstName}}</td>
-                        <td>{{user.Email}}</td>
-                        <td>
-                            <div class="action">
-                                <span>
-                                    <button pButton pRipple icon="pi pi-pencil"
-                                        class="p-button-rounded p-button-success" id="editStudent"
-                                        (click)="editStudent(student)"></button>
-                                </span>
-                                <span>
-                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
-                                        id="deleteStudent" (click)="deleteStudent(student)"></button>
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
-                </ng-template>
-            </p-table> -->
+                        <!-- <div>
+                            <label for="icon">Assignment File 2</label>
+                            <input id="Path1" inputId="icon" type="path" [(ngModel)]="inputFilePath"
+                                placeholder="Upload Path" size="90"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                             border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+                        </div> -->
+                        <!-- <div>
+                            <label for="icon">Assignment File 3</label>
+                            <input id="Path2" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path"
+                                size="90"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                             border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+                        </div> -->
+                        <!-- <div>
+                            <label for="icon">Assignment File 4</label>
+                            <input id="Path3" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path"
+                                size="90"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                             border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+                        </div> -->
+                        <!-- <div>
+                            <label for="icon">Assignment File 5</label>
+                            <input id="Path4" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path"
+                                size="90"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                             border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+                        </div> -->
+                    </div>
+                    <div>
+                        <p-dropdown class="dropdown" [options]="assignmentSelectList" [virtualScroll]="true" [editable]="true"
+                            appendTo="body" [(ngModel)]="selectedUploadAssignment" placeholder="Select Assignment"
+                            optionLabel="assignmentName"></p-dropdown>
+                    </div>
+                    <ng-template pTemplate="footer">
+                        <p-button (click)="uploadAssignment()" label="Upload" icon="pi pi-times"
+                            styleClass="p-button-rounded p-button-success">
+                        </p-button>
+                        <p-button (click)="closePopup()" label="Cancel" icon="pi pi-times"
+                            styleClass="p-button-rounded p-button-danger">
+                        </p-button>
+                    </ng-template>
+                </p-dialog>
+            </div>
+            <div class="box" style="height:50px;"> </div>
         </mat-card-content>
     </mat-card>
 </div>

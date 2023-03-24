@@ -23,10 +23,5 @@ export interface AssignmentSelect {
     assignmentId?: string;
 }
 
-export interface UploadedAssignment {
-    fileId?: number,
-    filePath?: string,
-    uploadDate?: Date,
-    uploadUser?: string,
-    assignmentId?: string
-}
+
+
