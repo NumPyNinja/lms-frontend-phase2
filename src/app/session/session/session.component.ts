@@ -88,25 +88,25 @@ export class SessionComponent implements OnInit {
           });
       } else {
         //add a new class
-          
-          this.sessionList.push(this.session);  
-          this.session.batchId=bat.batchId;
-          this.session.classStaffId=user1.userId;
-          this.sessionService.addSession(this.session).subscribe((res)=>{});
-  
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Class Created',
-          life: 3000,
-        });
-        this.getSessionList();
-      } (error) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Failed',
-          detail: error,
-          life: 3000,
+
+        this.sessionList.push(this.session);
+        this.session.batchId = bat.batchId;
+        this.session.classStaffId = user1.userId;
+        this.sessionService.addSession(this.session).subscribe((res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Successful',
+            detail: 'Class Created',
+            life: 3000,
+          });
+          this.ngOnInit();
+        }, (error) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Failed',
+            detail: error,
+            life: 3000,
+          });
         });
       }
       this.sessionList = [...this.sessionList];
