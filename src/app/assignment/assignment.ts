@@ -12,10 +12,7 @@ export interface Assignment {
     pathAttachment5?: string,
     createdBy?: string,
     batchId?: number,
-    graderId?: string,
-    programId?: number
-    programName?: string,
-    batchName?: string
+    graderId?: string
 }
 
 export interface AssignmentSelect {

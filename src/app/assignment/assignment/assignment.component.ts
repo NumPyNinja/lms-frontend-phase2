@@ -35,8 +35,7 @@ export class AssignmentComponent implements OnInit {
   message1: Message[] = [];
   programList: Program[];
   batchList: Batch[];
-  programName: string;
-  batchName: string;
+  selectedBatch: Batch;
 
 
   constructor(
@@ -98,15 +97,12 @@ export class AssignmentComponent implements OnInit {
     this.assignment = {};
     this.submitted = false;
     this.assigmentDialogue = true;
+    this.selectedBatch = undefined;
   }
 
   //save an assigment
   saveAssignment() {
     this.submitted = true;
-    const atd: any = this.assignment.batchName;
-    this.assignment.batchId = atd.batchId;
-    const att: any = this.assignment.programName;
-    this.assignment.programId = att.programId;
     if (this.assignment.assignmentName.trim()) {
       if (this.assignment.assignmentId) {
         this.assignmentService.updateAssignment(this.assignment).subscribe((res) => {
@@ -116,16 +112,16 @@ export class AssignmentComponent implements OnInit {
           this.messageService.add({
             severity: 'success',
             summary: 'Successful',
-            detail: this.assignment.assignmentName + ' Updated',
+            detail: ' Assignment Updated',
             life: 3000,
           });
         });
       } else {
         this.assignmentSize = this.assignmentSize + 1;
-        this.assignment.batchId = this.assignmentSize;
-        this.assignment.graderId = this.userId;
-        this.assignment.programName = att.programName;
-        this.assignment.batchName = atd.batchName
+        this.assignment.createdBy = this.userId;
+        if (this.selectedBatch) {
+          this.assignment.batchId = this.selectedBatch.batchId;
+        }
         this.assignmentService.saveAssignment(this.assignment).subscribe((res) => {
           this.assignmentService.getAssignments().subscribe((res) => {
             this.assignments = res;
@@ -142,11 +138,11 @@ export class AssignmentComponent implements OnInit {
       this.assigmentDialogue = false;
       this.assignment = {};
     }
-
   }
   hideDialog() {
     this.assigmentDialogue = false;
     this.submitted = false;
+    this.selectedBatch = undefined;
   }
 
   deleteAssigment(assigment: Assignment) {
@@ -170,7 +166,13 @@ export class AssignmentComponent implements OnInit {
 
   editAssignment(assigment: Assignment) {
     this.assignment = { ...assigment };
+    this.assignment.dueDate = new Date(this.assignment.dueDate);
     this.assigmentDialogue = true;
+    this.batchList.forEach(item => {
+      if (item.batchId === this.assignment.batchId) {
+        this.selectedBatch = item;
+      }
+    });
   }
 
 
@@ -185,37 +187,4 @@ export class AssignmentComponent implements OnInit {
     return index;
   }
 }
-  // upload Assigment button
-
-//   displayUploadAssignmentDialog: boolean = false;
-
-//   showDialog() {
-//     this.displayUploadAssignmentDialog = true;
-//   }
-
-//   closePopup() {
-//     this.displayUploadAssignmentDialog = false;
-//   }
-
-//   uploadAssignment() {
-//     const uploadedAssignment: UploadedAssignment = {
-//       filePath: this.inputFilePath,
-//       assignmentId: this.selectedUploadAssignment.assignmentId,
-//       uploadDate: new Date(),
-//       uploadUser: this.userId
-//     };
-//     this.assignmentService.uploadAssignments(uploadedAssignment).subscribe((res) => {
-//       this.inputFilePath = "";
-//       this.selectedUploadAssignment = undefined;
-//       this.closePopup();
-//       this.message1 = [
-//         { severity: 'success', summary: 'Filepath Uploaded Successfully', detail: '' }];
-//     });
-//   }
-
-// }
-
-// function hideDialog() {
-//   throw new Error('Function not implemented.');
-// }
-
+ 

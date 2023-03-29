@@ -123,13 +123,13 @@
 <p-dialog [(visible)]="assigmentDialogue" [style]="{width: '550px'}" header="Assigment Details" [modal]="true"
     styleClass="p-fluid">
     <ng-template pTemplate="content">
-        <label for="programName">Program Name</label>
+        <!-- <label for="programName">Program Name</label>
         <p-dropdown [options]="programList" id="programName" [(ngModel)]="assignment.programName"
-            placeholder="Select Program Name" optionLabel="programName" [showClear]="true"></p-dropdown>
+            placeholder="Select Program Name" optionLabel="programName" [showClear]="true"></p-dropdown> -->
 
-        <label for="batchName">Batch Number</label>
-        <p-dropdown [options]="batchList" [(ngModel)]="assignment.batchName" placeholder="Select Batch"
-            optionLabel="batchName" [showClear]="true"></p-dropdown>
+        <label for="batchId">Batch Number</label>
+        <p-dropdown [options]="batchList" [(ngModel)]="selectedBatch" placeholder="Select Batch"
+            optionLabel="batchId" [showClear]="true"></p-dropdown>
         <div class="p-field">
 
             <label for="assignment">Assignment Name</label>
@@ -147,16 +147,10 @@
             <input type="text" id="graderId" pInputText [(ngModel)]="assignment.graderId" required rows="3" cols="20" />
         </div>
 
-        <!-- <div class="p-field">
-            <label for="programDescription">Assignment Due Date</label>
-            <input type="text" id="dueDate" pInputText [(ngModel)]="assignment.dueDate" required
-                rows="3" cols="20" />
-        </div> -->
-
         <div class="p-field">
             <label for="icon">Assignment Due Date</label>
             <p-calendar [(ngModel)]="assignment.dueDate" [showIcon]="true" inputId="icon"
-                [style]="{ 'position': 'relative', 'z-index': '100' }"></p-calendar>
+                [style]="{ 'position': 'relative', 'z-index': '10' }"></p-calendar>
         </div>
         <div class="p-field">
             <label for="icon">Assignment File 1</label>
@@ -191,5 +185,4 @@
             (click)="saveAssignment()"></button>
     </ng-template>
 </p-dialog>
-<p-messages [(value)]="message1"></p-messages>
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
