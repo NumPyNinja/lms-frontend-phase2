@@ -4,7 +4,7 @@
     "target":"http://lms-backend-service.herokuapp.com",
 
     "pathRewrite": {
-      "^/api": ""
+      "^/api": "/lms"
     },
     "changeOrigin": true,
     "logLevel": "debug",
