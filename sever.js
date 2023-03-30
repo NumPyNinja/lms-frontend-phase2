@@ -15,9 +15,9 @@ const API_SERVICE_URL = "https://lms-phase2.herokuapp.com/lms/";
 app.use('/api', createProxyMiddleware({
     target: API_SERVICE_URL,
     changeOrigin: true,
-    pathRewrite: {
-        [`^/api`]: '',
-    },
+   // pathRewrite: {
+     //   [`^/api`]: '',
+    //},
  }));
 
 // Serve only the static files form the dist directory
