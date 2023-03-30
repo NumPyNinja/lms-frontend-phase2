@@ -173,7 +173,17 @@
                   </mat-form-field>
                 </mat-form-field>
               </div>
-
+              <div class="col">
+                <mat-form-field class="full-width">
+                  <mat-form-field appearance="fill">
+                    <mat-label>User Status</mat-label>
+                    <mat-select [formControl]="userRoleMaps" multiple>
+                      <mat-option *ngFor="let roleStatus of roleStatus" [value]="roleStatus">{{roleStatus}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </mat-form-field>
+              </div>
+    
               <div class="col">
                 <mat-form-field class="full-width">
                   <mat-form-field appearance="fill">

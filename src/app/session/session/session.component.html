@@ -109,8 +109,7 @@
     
             <div class="p-field" >
                 <label for="batchId">Batch Id</label>
-              <!-- <input type="text" id="batchId" pInputText [(ngModel)]="session.batchId" required autofocus
-                     />-->
+             
                     <p-dropdown [options]="batchList"  [(ngModel)]="session.batchId" 
                      placeholder="Select a Batch Id" id="batchId" editable="true"
                      optionLabel="batchId"  [showClear]="true"></p-dropdown>

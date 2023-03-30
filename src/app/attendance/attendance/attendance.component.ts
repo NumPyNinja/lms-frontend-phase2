@@ -39,7 +39,7 @@ export class AttendanceComponent implements OnInit {
   users: User[];
   attendanceDrop: string[]=['Present','Absent','Late','Excused'];
   selectedDrop:string[]=this.attendanceDrop;
-
+  
   constructor(
     private attendanceService: AttendanceService,
     private messageService: MessageService,
@@ -116,6 +116,11 @@ export class AttendanceComponent implements OnInit {
    
     this.submitted = true;
     //edit
+    const pro: any = this.attendance.classTopic;
+      const pro1: any = this.attendance.csId;
+      this.attendance.csId = pro.csId;
+      this.attendance.classTopic = pro.classTopic;
+
     
       if(this.attendance.programId){
          this.attendances[this.findIndexById(this.attendance.attId)] = this.attendance;
@@ -126,7 +131,8 @@ export class AttendanceComponent implements OnInit {
         detail: 'Attendance Updated',
         life: 3000,
       });
-      
+      this.attendance.classTopic = pro.classTopic;
+        this.attendance.programId = pro1;
       this.attendanceService.updateAttendance(this.attendance).subscribe((res) => {
         console.log('a attendance is save')
       });
@@ -187,7 +193,8 @@ export class AttendanceComponent implements OnInit {
     this.attendance = { ...attendance };
     this.attendanceDialogue = true;
     //data:attendance;
-    this.attendance={};
+   //this.attendance={};
+   //attendance.programName=this.attendance.programName;
   }
 
 

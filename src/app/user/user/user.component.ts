@@ -27,7 +27,7 @@ export class UserComponent implements OnInit {
   userRoleMaps:string[]=['Admin','Staff','Student'];
   userVisaStatus: string[] = ['Not-Specified', 'NA', 'GC-EAD', 'H4-EAD', 'H4', 'H1B', 
   'Canada-EAD', 'Indian-Citizen', 'US-Citizen', 'Canada-Citizen'];
-
+  roleStatus:string[]=['Active','Inactive']
   constructor(private userService: UserService,private fb: FormBuilder,private messageService: MessageService,
     private confirmationService: ConfirmationService) { }
  

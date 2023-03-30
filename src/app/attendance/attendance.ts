@@ -4,6 +4,7 @@ export interface Attendance {
     studentId?:string;
     studentName?:string;
     programName?: string;
+    classTopic?:string;
     programId?: string;
     users?: [] ;
     attendance?: string;

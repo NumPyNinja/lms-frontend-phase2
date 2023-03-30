@@ -101,6 +101,7 @@
     styleClass="p-fluid">
     <ng-template pTemplate="content">
         <div class="p-fluid p-grid p-formgrid">
+           
 
             <div class="p-field">
                 <label for="programName">Program Name</label>
@@ -127,7 +128,7 @@
     
             </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="icon">Attendance Date</label>
+                <label for="date">Attendance Date</label>
                 <p-calendar [(ngModel)]="selectedDate" [showIcon]="true" inputId="icon" id="calendarDueDate"
                     dateFormat="dd/mm/yy" [style]="{ 'position': 'relative', 'z-index': '80'}"></p-calendar>
             </div>
