@@ -11,7 +11,8 @@ import { Batch } from './batch';
 })
 export class BatchService {
 
-  url: string = '/api';
+  baseUrl = environment.baseUrl;
+  //url: string = '/api';
   batchList: Batch[];
 
   constructor(private httpClient: HttpClient,
@@ -19,11 +20,11 @@ export class BatchService {
 
   getBatchList(): Observable<Batch[]> {
    // return this.httpClient.get<Batch[]>('assets/Batch.json');
-   return this.httpClient.get<Batch[]>(this.url + "/batches");
+   return this.httpClient.get<Batch[]>(this.baseUrl + "/batches");
   }
 
   addBatch(batch: Batch): Observable<Batch> {
-    return this.httpClient.post<Batch>(this.url + "/batches", batch)
+    return this.httpClient.post<Batch>(this.baseUrl + "/batches", batch)
     .pipe(
       catchError(error => {
         let errorMsg: string;
@@ -37,11 +38,11 @@ export class BatchService {
 }
 
   updateBatch(batch: Batch) {
-    return this.httpClient.put<Batch>(this.url + "/batches/" + batch.batchId, batch);
+    return this.httpClient.put<Batch>(this.baseUrl+ "/batches/" + batch.batchId, batch);
   }
 
   deleteBatch(batch: Batch) {
-    return this.httpClient.delete<Batch>(this.url + "/batches/" + batch.batchId);
+    return this.httpClient.delete<Batch>(this.baseUrl+ "/batches/" + batch.batchId);
   }
 
 }
