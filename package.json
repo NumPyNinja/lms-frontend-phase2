@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "heroku-postbuild": "ng build  --prod && npm install -g http-server-spa",
-    "start": "http-server-spa dist/lms-frontend-phase2 index.html $PORT",
-  
+   "start": "node sever.js ng serve --proxy-config proxy.config.json",
+    "heroku-postbuild": "ng build ",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "proxyConfig": "proxy.config.json"
   },
   "private": true,
   "dependencies": {
