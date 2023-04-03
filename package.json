@@ -1,4 +1,4 @@
-{
+/*{
   "name": "lms-frontend-phase2",
   "version": "0.0.0",
   "scripts": {
@@ -10,7 +10,22 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "proxyConfig": "proxy.config.json"
+  },*/
+//heroku
+{
+  "name": "lms-frontend-phase2",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "heroku-postbuild": "ng build  --prod && npm install -g http-server-spa",
+    "start": "http-server-spa dist/lms-frontend-phase2 index.html $PORT",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+  
   },
+
   "private": true,
   "dependencies": {
     "@angular/animations": "^11.0.9",
