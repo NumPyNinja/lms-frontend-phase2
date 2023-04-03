@@ -43,7 +43,7 @@ export class BatchService {
   }
 
   deleteBatch(batch: Batch) {
-    return this.httpClient.delete<Batch>(this.baseUrl+ "/batches/" + batch.batchId);
+    return this.httpClient.delete<Batch>(this.url + "/batches/" + batch.batchId);
   }
 
 }
