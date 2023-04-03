@@ -3,9 +3,6 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-
-
-
 const morgan = require("morgan");
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
@@ -13,11 +10,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const HOST = "localhost";
 const API_SERVICE_URL = "https://lms-backend-service.herokuapp.com/lms/";
 
-// Set allowed methods header
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Methods', '*');
-  next();
-});
+
 
 
  Proxy endpoints
