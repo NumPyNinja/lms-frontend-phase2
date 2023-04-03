@@ -14,6 +14,7 @@ const API_SERVICE_URL = "https://lms-backend-service.herokuapp.com/lms/";
 // Set allowed methods header
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'GET,POST);
   next();
 });
 // Proxy endpoints
