@@ -18,7 +18,7 @@ export class SignUpService {
 
   addSignupUser(signup : SignUp):Observable<SignUp>{
       
-      return this.httpClient.post<SignUp>(this.baseUrl +"/signup",signup);
+      return this.httpClient.post<SignUp>(this.url +"/signup",signup);
   }
 
 
