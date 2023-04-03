@@ -10,14 +10,15 @@ import { Observable } from 'rxjs';
 })
 export class SignUpService {
 
+  baseUrl = environment.baseUrl;
 
-  url:string = "api";//'https://lms-admin-rest-service.heroku.com/signup';
+  //url:string = "api";//'https://lms-admin-rest-service.heroku.com/signup';
 
   constructor(private httpClient: HttpClient) { }
 
   addSignupUser(signup : SignUp):Observable<SignUp>{
       
-      return this.httpClient.post<SignUp>(this.url+"/signup",signup);
+      return this.httpClient.post<SignUp>(this.baseUrl +"/signup",signup);
   }
 
 
