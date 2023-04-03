@@ -3,7 +3,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const cors = require('cors');
+
 
 
 const morgan = require("morgan");
@@ -13,11 +13,12 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const HOST = "localhost";
 const API_SERVICE_URL = "https://lms-backend-service.herokuapp.com/lms/";
 
-//Enable CORS FOR AL ENDPOINTS
+// Set allowed methods header
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  next();
+});
 
-app.use(cors({
-  origin: 'https://lms-frontend.herokuapp.com'
-}));
 
  Proxy endpoints
 app.use('/api', createProxyMiddleware({
