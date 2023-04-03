@@ -11,6 +11,11 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const HOST = "localhost";
 const API_SERVICE_URL = "https://lms-phase2.herokuapp.com/lms/";
 
+// Set allowed methods header
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  next();
+});
 // Proxy endpoints
 app.use('/api', createProxyMiddleware({
     target: API_SERVICE_URL,
