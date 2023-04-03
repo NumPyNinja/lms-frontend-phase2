@@ -3,22 +3,20 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+
 const morgan = require("morgan");
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 
 const HOST = "localhost";
-const API_SERVICE_URL = "https://lms-backend-service.herokuapp.com/lms/";
+const API_SERVICE_URL = "https://lms-phase2.herokuapp.com/lms/";
 
-
-
-
- Proxy endpoints
+// Proxy endpoints
 app.use('/api', createProxyMiddleware({
     target: API_SERVICE_URL,
     changeOrigin: true,
     pathRewrite: {
-      [`^/api`]: '',
+        [`^/api`]: '',
     },
  }));
 
