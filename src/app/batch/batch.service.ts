@@ -12,7 +12,7 @@ import{environment} from '../../environments/environment';
 })
 export class BatchService {
 
-  url = environment.baseUrl;
+  url = environment.url;
  // url: string = '/api';
   batchList: Batch[];
 
