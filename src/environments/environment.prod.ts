@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl:'https://lms-backend-service.herokuapp.com/lms'  //heroku
+  baseUrl:'https://10.0.0.221/lms'  //heroku
 
   
 };
