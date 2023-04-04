@@ -9,7 +9,7 @@ import { environment} from '../../environments/environment';
 })
 export class AssignmentService {
   
-  url:environment.url;
+  url = environment.url;
   //url: string = '/api';
 
 
