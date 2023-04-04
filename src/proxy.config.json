@@ -1,7 +1,7 @@
 {
   "/api": {
 
-    "target":"https://lms-backend-service.herokuapp.com/lms",
+    "target":"https://10.0.0.221/lms",
 
     "pathRewrite": {
       "^/api": ""
