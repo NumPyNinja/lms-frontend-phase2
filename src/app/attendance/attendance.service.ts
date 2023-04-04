@@ -2,12 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Attendance } from './attendance';
+import { environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AttendanceService {
-  url: string = '/api';
+  
+  url = environment.url;
+  //url: string = '/api';
 
   constructor(private httpClient: HttpClient) { }
 
