@@ -13,7 +13,7 @@ export interface User {
     userEduPg?: string,
     userTimeZone?: string,
     userId?:string,
-    userRoleMaps?: UserRoleMaps;
+    userRoleMaps?: UserRoleMaps[];
     userName?: string;
     password?: string;
     

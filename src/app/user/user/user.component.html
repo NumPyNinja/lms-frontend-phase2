@@ -50,33 +50,33 @@
             <th style="width: 10rem" pSortableColumn="userFirstName">Name <p-sortIcon field="userFirstName">
               </p-sortIcon>
             </th>
-            <th style="width: 15rem" pSortableColumn="emailAddress">Email Address <p-sortIcon field="emailAddress">
+            <th style="width: 15rem" pSortableColumn="userLocation">Location <p-sortIcon field="emailAddress">
               </p-sortIcon>
             </th>
-            <th style="width: 12rem" pSortableColumn="phoneNumber">Contact Number <p-sortIcon field="phoneNumber">
+            <th style="width: 12rem" pSortableColumn="userPhoneNumber">Phone Number <p-sortIcon field="phoneNumber">
               </p-sortIcon>
             </th>
-            <th style="width: 7rem" pSortableColumn="batch">Batch <p-sortIcon field="batch"></p-sortIcon>
+           <!-- <th style="width: 7rem" pSortableColumn="batch">Batch <p-sortIcon field="batch"></p-sortIcon>
             </th>
             <th style="width: 7rem" pSortableColumn="skill">Skill <p-sortIcon field="skill"></p-sortIcon>
-            </th>
+            </th>-->
             <th style="width: 10rem"> Edit / Delete</th>
           </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-user>
+       
           <tr>
             <td>
               <p-tableCheckbox [value]="user"></p-tableCheckbox>
             </td>
-            <td>
-              <p-button label="{{user.user_id}}" styleClass="p-button-link" (click)="getUserList()"></p-button>
-            </td>
-            <td>{{user.firstName}} {{user.lastName}}</td>
-            <td style="word-wrap: break-word;">{{user.emailAddress}}</td>
-            <td>{{user.phoneNumber}}</td>
-            <td>{{user.batch}}</td>
-            <td>{{user.skill}}</td>
+            
+            <td>{{user.userId}}</td>
+            <td>{{user.userFirstName}} {{user.userLastName}}</td>
+            <td style="word-wrap: break-word;">{{user.userLocation}}</td>
+            <td>{{user.userPhoneNumber}}</td>
+            <!--<td>{{user.batch}}</td>
+            <td>{{user.skill}}</td>-->
             <td>
               <div class="action">
                 <span>
@@ -137,12 +137,20 @@
             <div class="row">
               <div class="col">
                 <mat-form-field class="full-width">
+                  <input matInput placeholder="location" formControlName="Location">
+                  <mat-error *ngIf="userForm.controls['userLocation'].hasError('required')">
+                    Location <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+             <!-- <div class="col">
+                <mat-form-field class="full-width">
                   <input matInput placeholder="Email address" formControlName="emailAddress">
                   <mat-error *ngIf="userForm.controls['emailAddress'].hasError('required')">
                     Email address is <strong>required</strong>
                   </mat-error>
                 </mat-form-field>
-              </div>
+              </div>-->
               <div class="col">
                 <mat-form-field class="full-width">
                   <input matInput placeholder="Phone no" formControlName="userPhoneNumber">
@@ -167,27 +175,38 @@
                 <mat-form-field class="full-width">
                   <mat-form-field appearance="fill">
                     <mat-label>User Role</mat-label>
-                    <mat-select [formControl]="userRoleMaps" multiple>
+                    <mat-select [formControl]="userRoleMaps[0].role" >
                       <mat-option *ngFor="let role of userRoleMaps" [value]="role">{{role}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </mat-form-field>
               </div>
-
+              <div class="col">
+                <mat-form-field class="full-width">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Role Staus </mat-label>
+                    <mat-select [formControl]="userRoleMaps[0].roleStatus">
+                      <mat-option *ngFor="let roleStatus  of roleStatus" [value]="roleStatus">{{roleStatus}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </mat-form-field>
+              </div>
               <div class="col">
                 <mat-form-field class="full-width">
                   <mat-form-field appearance="fill">
                     <mat-label>Visa Status </mat-label>
-                    <mat-select [formControl]="userVisaStatus">
+                    <mat-select [formControl]="userVisaStatus" >
                       <mat-option *ngFor="let v1 of userVisaStatus" [value]="v1">{{v1}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </mat-form-field>
               </div>
 
+
+
             </div>
 
-            <div class="row">
+            <!--<div class="row">
               <div class="col">
                 <mat-form-field class="full-width">
                   <input matInput placeholder="User name" formControlName="userName">
@@ -205,10 +224,10 @@
                 </mat-form-field>
               </div>
            
-            </div>
+            </div>-->
 
             <br>
-              <div class="row">
+             <!-- <div class="row">
               
               <div class="col">
                   <mat-label>Upload Profile Picture: </mat-label>
@@ -222,7 +241,7 @@
                 
             </div>
           
-             </div>
+             </div>-->
             
 
 
@@ -281,10 +300,11 @@
   </p-dialog>
 
 
+  ...
   <p-dialog [(visible)]="viewUserDialogue" [style]="{width: '700px'}" header="User Details" [modal]="true"
     styleClass="p-fluid">
 
-    <p-table styleClass="p-datatable-gridlines" responsiveLayout="scroll" *ngIf='user'>
+<p-table styleClass="p-datatable-gridlines" responsiveLayout="scroll" *ngIf='user'>
       <ng-template pTemplate="header">
         <tr>
           <th>First Name </th>
@@ -364,6 +384,7 @@
         </tr>
       </ng-template>
     </p-table>
+...
 
 
     <ng-template pTemplate="footer">

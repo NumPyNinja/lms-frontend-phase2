@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import{User}from '../user';
 import { UserService } from '../user.service';
 import { ConfirmationService } from 'primeng/api';
@@ -21,10 +21,11 @@ export class UserComponent implements OnInit {
   userDialogue : boolean = false;
   viewUserDialogue:boolean=false;
   //to save user profile picture
-  imageFile : any = File;
-  resumeFile : any = File;
+  //imageFile : any = File;
+  //resumeFile : any = File;
   role = new FormControl();
   userRoleMaps:string[]=['Admin','Staff','Student'];
+  roleStatus:string[]=['Active','Inactive'];
   userVisaStatus: string[] = ['Not-Specified', 'NA', 'GC-EAD', 'H4-EAD', 'H4', 'H1B', 
   'Canada-EAD', 'Indian-Citizen', 'US-Citizen', 'Canada-Citizen'];
 
@@ -37,14 +38,13 @@ export class UserComponent implements OnInit {
   private selectRow(checkValue: any) {
   // console.log(checkValue);
   }
-  private getUserList() {
-    this.visibility = true;
-    this.userService.getUsers().subscribe((res)=> {
-      this.users=res.userDetails;
-      this.visibility = false;
-    });
-    
-  }
+  private getUserList() { 
+    this.visibility = true;this.userService.getAllUsers().subscribe(users => {
+      this.users = users; 
+    this.visibility = false;
+   });
+   }
+
   viewUser(user: User) {
     this.user = { ...user };
     this.viewUserDialogue = true;
@@ -70,24 +70,24 @@ export class UserComponent implements OnInit {
     userFirstName: [null, Validators.required],
     userMiddleName: [null, Validators.required],
     userLastName: [null, Validators.required],
-    emailAddress: [null, Validators.required],
+   // emailAddress: [null, Validators.required],
     userPhoneNumber: [null, Validators.required],
     userLinkedinUrl: [null, Validators.required],
-    program: [null, Validators.required],
+    //program: [null, Validators.required],
     userEduUg: [null, Validators.required],
     userEduPg: [null, Validators.required],
     userTimeZone:[null, Validators.required],
   //  skill: [null, Validators.required],
   //  prevExp: [null, Validators.required],
-    experience: [null, Validators.required],
+   // experience: [null, Validators.required],
     usercomments: [null, Validators.required],
-    fileType: [null, Validators.required],
-    location:[],
+   // fileType: [null, Validators.required],
+    userLocation:[null, Validators.required],
     userRoleMaps: [null, Validators.required],
   //  batch: [null, Validators.required],
-    userVisaStatus: [null, Validators.required],
-    userName: [null, Validators.required],
-    password: [null, Validators.required],
+  userVisaStatus: [null, Validators.required],
+   // userName: [null, Validators.required],
+   //password: [null, Validators.required],
   //  address: [null, Validators.required],
    // city: [null, Validators.required],
     //state: [null, Validators.required],
@@ -95,8 +95,15 @@ export class UserComponent implements OnInit {
    //   Validators.required, Validators.minLength(5), Validators.maxLength(5)])
    // ],
    // shippig: ['free', Validators.required]
+  //userRoleMaps: this.fb.array([
+   // this.fb.group({
+     // roleId: ['', Validators.required],
+      //userRoleStatus: ['', Validators.required]
+   // })
+ // ])
+});
 
-  });
+
 
   hasUnitNumber = false;
 
@@ -170,7 +177,21 @@ export class UserComponent implements OnInit {
     this.users.push(this.userForm.value);
     alert('Thanks!');
   }
+  
+ /* onSubmit1() { this.submitted = true;
 
+    if (this.userForm.valid) 
+    { this.userService.addUser(this.userForm.value).subscribe({ next: (res) => 
+      { this.users.push(res); this.userForm.reset(); 
+      alert('User added successfully');
+     }, error: () => { 
+      alert('Error adding user details.');
+     } 
+    });
+
+  }
+}*/
+  
   editProgram(user: User) {
 
     console.log('Tesggggggg')
@@ -216,10 +237,10 @@ export class UserComponent implements OnInit {
         // });
       }
         const userData = new FormData();
-        
         userData.append("userInfo", JSON.stringify(this.userForm.value));
-        userData.append("imageFile", this.imageFile);
-        userData.append("resume",this.resumeFile);
+
+       // userData.append("imageFile", this.imageFile);
+       // userData.append("resume",this.resumeFile);
         
         this.userService.addUser(userData).subscribe({
           next:(res) => {
@@ -242,6 +263,28 @@ export class UserComponent implements OnInit {
       this.user= {};
 
       
+    }
+  }
+  onSubmit2() {
+    this.submitted = true;
+  
+    if (this.userForm.valid) {
+      const userData = new FormData();
+      userData.append('userInfo', JSON.stringify(this.userForm.value));
+      //userData.append('roleId', this.userForm.get('userRoleMaps.roleId').value);
+      //userData.append('userRoleStatus', this.userForm.get('userRoleMaps.userRoleStatus').value);
+      this.userService.addUser(userData).subscribe({
+        next: (res) => {
+          this.userForm.reset();
+          alert('User added successfully');
+        },
+        error: () => {
+          alert('Error adding user details.');
+        }
+      });
+  
+      this.userDialogue = false;
+      this.user = {};
     }
   }
   deleteSelectedUsers() {
@@ -281,20 +324,20 @@ export class UserComponent implements OnInit {
     return index;
   }
 
-  saveImage(event:any){
+  /*saveImage(event:any){
    
     const imageFile =event.target.files[0];
         console.log(imageFile);
         this.imageFile = imageFile;
 
-  }
+  }*/
 
-  saveFile(event:any){
+  /*saveFile(event:any){
    
     const file =event.target.files[0];
         console.log(file);
         this.resumeFile = file;
 
-  }
+  }*/
 
 }

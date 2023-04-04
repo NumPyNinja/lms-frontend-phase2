@@ -18,7 +18,7 @@ export class UserService {
     return this.httpClient.get<User[]>(this.url+"/users/roles");
   }
 
-  getAllUsers(): Observable<any> {
+  getAllUsers(): Observable<User[]> {
     //return this.httpClient.get<any>('assets/Users.json')
     return this.httpClient.get<User[]>(this.url+"/users");
   }
@@ -28,6 +28,7 @@ export class UserService {
     return this.httpClient.post<any>(this.url+'/users/roleStatus',userData);
     
   }
+  
 
   //addProgram(user: User): Observable<User> {
     //user.online = true;
