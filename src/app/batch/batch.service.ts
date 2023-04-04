@@ -12,8 +12,8 @@ import{environment} from '../../environments/environment';
 })
 export class BatchService {
 
-  //baseUrl = environment.baseUrl;
-  url: string = '/api';
+  url = environment.baseUrl;
+ // url: string = '/api';
   batchList: Batch[];
 
   constructor(private httpClient: HttpClient,
