@@ -12,7 +12,8 @@ export class SessionService {
   updateSession(session: Session) {
     throw new Error('Method not implemented.');
   }
-  url: string = '/api'; //ttps://lms-phase2.herokuapp.com/lms/",
+   url = environment.url;
+  //url: string = '/api'; //ttps://lms-phase2.herokuapp.com/lms/",
   constructor(private httpClient : HttpClient , private utilityService: UtilityService) { }
   getSessions(): Observable<Session[]> {
     return this.httpClient.get<Session[]>(this.url + "/allClasses"); 
