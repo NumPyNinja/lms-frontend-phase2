@@ -14,9 +14,9 @@ const HOST = "localhost";
 const API_SERVICE_URL = "https://lms-backend-service.herokuapp.com/lms";
 // Set allowed methods header
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Origin', 'https://lms-backend-service.herokuapp.com/lms');
+  //res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  //res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   next();
 });
 // Proxy endpoints
