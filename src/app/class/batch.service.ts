@@ -9,6 +9,7 @@ import { environment} from '../../environments/environment';
 })
 export class ClassService {
   
+   url = environment.url;
 
   //url: string = '/api';
 
