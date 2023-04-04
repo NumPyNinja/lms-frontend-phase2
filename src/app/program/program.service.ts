@@ -11,7 +11,7 @@ import { environment} from '../../environments/environment';
 })
 export class ProgramService {
 
-    url = environment.baseUrl;
+    url = environment.url;
 
   //url: string = '/api'; //https://lms-phase2.herokuapp.com/lms/",
 
