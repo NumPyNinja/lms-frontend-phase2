@@ -1,5 +1,5 @@
 export interface Batch {
-  batchId?:  string ;
+  batchId?:  number ;
   batchName?: string;
   batchDescription?: string;
   batchStatus?: boolean;
