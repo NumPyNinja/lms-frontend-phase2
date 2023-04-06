@@ -10,6 +10,8 @@ import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
 import { Attendance } from '../attendance';
 import { AttendanceService } from '../attendance.service';
+import { Batch } from 'src/app/batch/batch';
+import { BatchService } from 'src/app/batch/batch.service';
 
 
 
@@ -31,6 +33,7 @@ export class AttendanceComponent implements OnInit {
   selectedAttendance: Attendance[];
   submitted: boolean;
   programList: Program[];
+  batchList:Batch[];
   selectedProgram: string;
   sessionList: Session[];
   selectedClasses: Session[];
@@ -46,7 +49,8 @@ export class AttendanceComponent implements OnInit {
     private programService: ProgramService,
     private confirmationService: ConfirmationService,
     private sessionService:SessionService,
-    private userService: UserService) {
+    private userService: UserService,
+    private batchService:BatchService) {
     
   }
 
@@ -61,6 +65,10 @@ export class AttendanceComponent implements OnInit {
     this.sessionService.getSessions().subscribe(res=>{
       this.sessionList=res
     })
+    this.batchService.getBatchList().subscribe(res=>{
+      this.batchList=res
+    }
+      )
    
   }
 

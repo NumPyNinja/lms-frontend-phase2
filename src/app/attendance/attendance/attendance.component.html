@@ -101,13 +101,20 @@
     styleClass="p-fluid">
     <ng-template pTemplate="content">
         <div class="p-fluid p-grid p-formgrid">
-           
+            
 
             <div class="p-field">
                 <label for="programName">Program Name</label>
                 <p-dropdown [options]="programList" id="programName" [(ngModel)]="attendance.programName"
                     placeholder="Select a Program name" editable="true" optionLabel="programName" [showClear]="true">
                 </p-dropdown>
+            </div>
+            <div class="p-field" >
+                <label for="batchId">Batch Id</label>
+             
+                    <p-dropdown [options]="batchList"  [(ngModel)]="attendance.batchId" 
+                     placeholder="Select a Batch Id" id="batchId" editable="true"
+                     optionLabel="batchId"  [showClear]="true"></p-dropdown>
             </div>
             <div class="p-field">
                 <label for="class">Class Name</label>
