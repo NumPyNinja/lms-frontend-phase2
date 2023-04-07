@@ -57,6 +57,26 @@
                             <input id="Path" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path" size="90"
                                 class="text-base text-color surface-overlay p-2 border-1 
                              border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+
+                            <label>Assignment File 2</label>
+                            <input id="Path" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path" size="90"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                          border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+
+                            <label>Assignment File 3</label>
+                            <input id="Path" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path" size="90"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                       border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+
+                            <label>Assignment File 4</label>
+                            <input id="Path" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path" size="90"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                    border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
+
+                            <label>Assignment File 5</label>
+                            <input id="Path" type="path" [(ngModel)]="inputFilePath" placeholder="Upload Path" size="90"
+                                class="text-base text-color surface-overlay p-2 border-1 
+                 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full ">
                         </div>
 
                         <!-- <div>
@@ -89,9 +109,10 @@
                         </div> -->
                     </div>
                     <div>
-                        <p-dropdown class="dropdown" [options]="assignmentSelectList" [virtualScroll]="true" [editable]="true"
-                            appendTo="body" [(ngModel)]="selectedUploadAssignment" placeholder="Select Assignment"
-                            optionLabel="assignmentName"></p-dropdown>
+                        <label for="assignmentName">Assignment Name</label>
+                        <p-dropdown class="dropdown"[options]="assignmentSelectList" id="assignmentName"
+                            [editable]="true" [(ngModel)]="selectedUploadAssignment"
+                            placeholder="Select Assignment" optionLabel="assignmentName"></p-dropdown>
                     </div>
                     <ng-template pTemplate="footer">
                         <p-button (click)="uploadAssignment()" label="Upload" icon="pi pi-times"

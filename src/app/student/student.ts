@@ -3,5 +3,5 @@ export interface UploadedAssignment {
     filePath?: string,
     uploadDate?: Date,
     uploadUser?: string,
-    assignmentId?: string
+    assignmentId?: string,
 }

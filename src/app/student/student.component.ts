@@ -32,7 +32,7 @@ export class StudentComponent implements OnInit {
   first: number;
   assignment: Assignment;
   assignments: Assignment[];
- 
+
 
 
   constructor(
@@ -40,15 +40,12 @@ export class StudentComponent implements OnInit {
     private userService: UserService,
     private batchService: BatchService,
     private assignmentService: AssignmentService,
-  ) { 
-    {
-      this.assignmentService.getAssignments().subscribe(list =>{
-        this.assignmentSelectList = list;
-      })
-    }
-  }
+  ) { }
 
   ngOnInit(): void {
+    this.assignmentService.getAssignments().subscribe(list => {
+      this.assignmentSelectList = list;
+    });
     this.userService.getAllUsers().subscribe((data) => {
       this.users = data;
     });
@@ -56,9 +53,6 @@ export class StudentComponent implements OnInit {
       this.batchList = data;
     });
   }
-
-
-
   // upload Assigment button
 
   displayUploadAssignmentDialog: boolean = false;
