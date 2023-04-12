@@ -22,12 +22,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { UserComponent } from './user/user/user.component';
-import { AssignmentComponent } from './assignment/assignment/assignment.component';
-import { AttendanceComponent } from './attendance/attendance/attendance.component';
 
 import {ListboxModule} from 'primeng/listbox';
 import { SignupComponent } from './login/sign-up/sign-up/sign-up.component';
-import { ClassComponent } from './class/class/class.component';
 import { ForgotPasswordComponent } from './login/forgot-password/forgot-password.component';
 import { VerificationCodeComponent } from './login/forgot-password/verification-code/verification-code.component';
 import { DropdownModule } from 'primeng/dropdown';
@@ -36,7 +33,6 @@ import { SessionComponent } from './session/session/session.component';
 
 import { ResetPasswordComponent } from './login/forgot-password/reset-password/reset-password.component';
 
-import { StudentComponent } from './student/student.component';
 
 
 @NgModule({
@@ -48,15 +44,11 @@ import { StudentComponent } from './student/student.component';
     ProgramComponent,
     BatchComponent,
     UserComponent,
-    AssignmentComponent,
-    AttendanceComponent,
     SignupComponent,
-    ClassComponent,
     ForgotPasswordComponent,
     VerificationCodeComponent,
     ResetPasswordComponent,
-    SessionComponent,
-    StudentComponent
+    SessionComponent
 
   ],
 
